@@ -25,11 +25,11 @@ def _load_cached(csv_path: str):
 
 
 def _default_index(options: list[str], desired: str) -> int:
-    try:
-        return options.index(desired)
-    except ValueError:
-        return 0
-
+    desired_cf = desired.casefold()
+    for i, opt in enumerate(options):
+        if str(opt).casefold() == desired_cf:
+            return i
+    return 0
 
 def main() -> None:
     st.set_page_config(page_title="Player Match Physical Overview", layout="wide")
@@ -57,8 +57,11 @@ def main() -> None:
     with st.sidebar:
         st.header("Filters")
 
+        default_team_name = "FC Den Bosch"
+        team_default_idx = _default_index(teams, default_team_name)
+        
         team = st.selectbox("Team", teams, index=team_default_idx)
-
+        
         players = list_players_for_team(df, team) if team else []
         player = st.selectbox("Player", players, index=0 if players else None)
 
