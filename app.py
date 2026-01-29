@@ -6,12 +6,15 @@ from __future__ import annotations
 from pathlib import Path
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 from load_table import (
     build_player_match_overview,
+    estimate_table_height_px,
     list_players_for_team,
     list_teams,
     load_physical_data,
+    styler_to_html,
     validate_physical_data,
 )
 
@@ -45,7 +48,6 @@ def main() -> None:
     with st.sidebar:
         st.header("Filters")
         team = st.selectbox("Team", teams, index=0 if teams else None)
-
         players = list_players_for_team(df, team) if team else []
         player = st.selectbox("Player", players, index=0 if players else None)
 
@@ -54,8 +56,13 @@ def main() -> None:
         st.stop()
 
     try:
-        _, styler = build_player_match_overview(df, team, player)
-        st.write(styler)
+        display_df, styler = build_player_match_overview(df, team, player)
+
+        # Render exact same layout/styling + show the full table without scrolling.
+        html = styler_to_html(styler)
+        height = estimate_table_height_px(n_rows=len(display_df))
+        components.html(html, height=height, scrolling=False)
+
     except Exception as e:
         st.error(str(e))
 
