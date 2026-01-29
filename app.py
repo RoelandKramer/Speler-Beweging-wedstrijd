@@ -85,6 +85,29 @@ def main() -> None:
         html = styler_to_html(styler)
         height = estimate_table_height_px(n_rows=len(display_df))
         components.html(html, height=height, scrolling=False)
+
+    
+        title_text = "Player Match Physical Overview"
+        caption_text = "{} vs {} — {} (all matches)".format(player_1, player_2, team) if player_2 else "{} — {} (per match)".format(player_1, team)
+        
+        png_bytes = table_to_png_bytes(
+            display_df,
+            title=title_text,
+            caption=caption_text,
+            dpi=200,  # increase to 300 if you want higher-res
+        )
+        
+        file_name = "physical_table_{}_{}.png".format(
+            str(player_1).replace(" ", "_"),
+            ("vs_" + str(player_2).replace(" ", "_")) if player_2 else "solo",
+        )
+        
+        st.download_button(
+            label="Download table as PNG (A4 landscape)",
+            data=png_bytes,
+            file_name=file_name,
+            mime="image/png",
+        )
     except Exception as e:
         st.error(str(e))
 
