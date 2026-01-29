@@ -57,9 +57,32 @@ BAR_SCALES = {
 ROW_BG_PLAYER_1 = "#FFFFFF"
 ROW_BG_PLAYER_2 = "#E8F2FF"  # light blue
 
+def _normalize_sheddy(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Treat these names as the same player and force position RB.
+    """
+    aliases = {
+        "Sheddy Ezzeldin Barglan",
+        "Sheddy Ezzeldin Daldom Hamad Barglan",
+    }
+
+    if "player_name" not in df.columns:
+        return df
+
+    mask = df["player_name"].astype(str).isin(aliases)
+    if not mask.any():
+        return df
+
+    df.loc[mask, "player_name"] = "Sheddy Ezzeldin Barglan"
+    if "position" in df.columns:
+        df.loc[mask, "position"] = "RB"
+    return df
+
 
 def load_physical_data(csv_path: str) -> pd.DataFrame:
-    return pd.read_csv(csv_path)
+    df = pd.read_csv(csv_path)
+    df = _normalize_sheddy(df)
+    return df
 
 
 def validate_physical_data(df: pd.DataFrame) -> None:
