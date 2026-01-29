@@ -128,14 +128,7 @@ def _match_date_from_match_id(match_id: object) -> Optional[pd.Timestamp]:
         return None
 
 
-def _compute_player_match_metrics(
-    df: pd.DataFrame,
-    team_name: str,
-    player_name: str,
-) -> pd.DataFrame:
-    """
-    Returns per-match rows for one player, with join keys.
-    """
+def _compute_player_match_metrics(df: pd.DataFrame, team_name: str, player_name: str) -> pd.DataFrame:
     filtered = df.loc[
         (df["club"].astype(str) == str(team_name))
         & (df["player_name"].astype(str) == str(player_name))
@@ -173,7 +166,20 @@ def _compute_player_match_metrics(
             "sprints": sprints,
         }
     )
-    return out
+    return out.reset_index(drop=True)
+
+
+def _sort_player_matches_desc(p: pd.DataFrame) -> pd.DataFrame:
+    if p.empty:
+        return p
+
+    if p["_match_date"].notna().any():
+        return p.sort_values("_match_date", ascending=False, kind="mergesort").reset_index(drop=True)
+
+    mid_num = pd.to_numeric(p["match_id"], errors="coerce")
+    return p.assign(_mid_num=mid_num).sort_values("_mid_num", ascending=False, kind="mergesort").drop(
+        columns=["_mid_num"]
+    ).reset_index(drop=True)
 
 
 def build_player_match_overview(
@@ -183,10 +189,11 @@ def build_player_match_overview(
     compare_player_name: Optional[str] = None,
 ) -> Tuple[pd.DataFrame, "pd.io.formats.style.Styler"]:
     """
-    If compare_player_name is provided:
-      - Show ONLY shared matches (by match_id)
-      - For each match: player1 row then player2 row
-      - player2 rows are gray
+    Always show ALL matches of player 1.
+    If compare_player_name is set:
+      - Insert player 2 row under player 1 only for matches that player 2 also played.
+      - Player 2 rows are gray.
+      - Player 2 matches that player 1 didn't play are skipped (per your requirement).
     """
     validate_physical_data(df)
     cols = OverviewColumns()
@@ -194,97 +201,54 @@ def build_player_match_overview(
     p1 = _compute_player_match_metrics(df, team_name, team_player_name)
     if p1.empty:
         raise ValueError(f"No rows found for club={team_name!r} player_name={team_player_name!r}")
+    p1 = _sort_player_matches_desc(p1)
 
-    if compare_player_name and str(compare_player_name) != str(team_player_name):
-        p2 = _compute_player_match_metrics(df, team_name, compare_player_name)
-        if p2.empty:
-            raise ValueError(
-                f"No rows found for club={team_name!r} compare_player_name={compare_player_name!r}"
-            )
+    p2_map: dict[object, dict] = {}
+    compare_active = bool(compare_player_name) and str(compare_player_name) != str(team_player_name)
+    if compare_active:
+        p2 = _compute_player_match_metrics(df, team_name, str(compare_player_name))
+        if not p2.empty:
+            # one row per match_id; keep first if duplicates exist
+            p2 = _sort_player_matches_desc(p2).drop_duplicates(subset=["match_id"], keep="first")
+            p2_map = {row["match_id"]: row.to_dict() for _, row in p2.iterrows()}
 
-        common = p1.merge(
-            p2[["match_id"]],
-            on="match_id",
-            how="inner",
-        )
-
-        if common.empty:
-            raise ValueError("No shared matches found between the two selected players.")
-
-        p1c = p1.loc[p1["match_id"].isin(common["match_id"])].copy()
-        p2c = p2.loc[p2["match_id"].isin(common["match_id"])].copy()
-
-        # Most recent first (use p1 dates; same match_id => same date)
-        sort_key = p1c[["match_id", "_match_date"]].drop_duplicates()
-        if sort_key["_match_date"].notna().any():
-            sort_key = sort_key.sort_values("_match_date", ascending=False)
-        else:
-            sort_key["_mid_num"] = pd.to_numeric(sort_key["match_id"], errors="coerce")
-            sort_key = sort_key.sort_values("_mid_num", ascending=False)
-
-        order = sort_key["match_id"].tolist()
-        p1c["_order"] = p1c["match_id"].apply(lambda x: order.index(x))
-        p2c["_order"] = p2c["match_id"].apply(lambda x: order.index(x))
-
-        p1c["_row_type"] = "primary"
-        p2c["_row_type"] = "compare"
-
-        def _to_display(frame: pd.DataFrame) -> pd.DataFrame:
-            return pd.DataFrame(
-                {
-                    "_row_type": frame["_row_type"],
-                    "_order": frame["_order"],
-                    cols.match: frame["match_label"],
-                    cols.player: frame["player_name"],
-                    cols.pos: frame["position"],
-                    cols.minutes: frame["minutes"],
-                    cols.total_distance: frame["total_km"],
-                    cols.m_per_min: frame["m_per_min"],
-                    cols.runs: frame["runs"],
-                    cols.sprints: frame["sprints"],
-                }
-            )
-
-        d1 = _to_display(p1c)
-        d2 = _to_display(p2c)
-
-        # interleave: player1 then player2 per match
-        combined = (
-            pd.concat([d1, d2], ignore_index=True)
-            .sort_values(by=["_order", "_row_type"], ascending=[True, True])  # compare after primary
-            .reset_index(drop=True)
-        )
-        display_df = combined.drop(columns=["_order"])
-
-    else:
-        # single player mode
-        p1["_row_type"] = "primary"
-        display_df = pd.DataFrame(
+    rows: list[dict] = []
+    for _, r1 in p1.iterrows():
+        rows.append(
             {
-                "_row_type": p1["_row_type"],
-                cols.match: p1["match_label"],
-                cols.player: p1["player_name"],
-                cols.pos: p1["position"],
-                cols.minutes: p1["minutes"],
-                cols.total_distance: p1["total_km"],
-                cols.m_per_min: p1["m_per_min"],
-                cols.runs: p1["runs"],
-                cols.sprints: p1["sprints"],
+                "_row_type": "primary",
+                cols.match: r1["match_label"],
+                cols.player: r1["player_name"],
+                cols.pos: r1["position"],
+                cols.minutes: r1["minutes"],
+                cols.total_distance: r1["total_km"],
+                cols.m_per_min: r1["m_per_min"],
+                cols.runs: r1["runs"],
+                cols.sprints: r1["sprints"],
             }
         )
 
-        # sort most recent first
-        if p1["_match_date"].notna().any():
-            display_df = display_df.iloc[p1["_match_date"].sort_values(ascending=False).index].reset_index(
-                drop=True
-            )
-        else:
-            mid = pd.to_numeric(p1["match_id"], errors="coerce")
-            display_df = display_df.iloc[mid.sort_values(ascending=False).index].reset_index(drop=True)
+        if compare_active:
+            r2 = p2_map.get(r1["match_id"])
+            if r2 is not None:
+                rows.append(
+                    {
+                        "_row_type": "compare",
+                        cols.match: r2["match_label"],
+                        cols.player: r2["player_name"],
+                        cols.pos: r2["position"],
+                        cols.minutes: r2["minutes"],
+                        cols.total_distance: r2["total_km"],
+                        cols.m_per_min: r2["m_per_min"],
+                        cols.runs: r2["runs"],
+                        cols.sprints: r2["sprints"],
+                    }
+                )
+
+    display_df = pd.DataFrame(rows)
 
     # ---- styling ----
-    styler = display_df.style.hide(axis="index")
-    styler = styler.hide(axis="columns", subset=["_row_type"])
+    styler = display_df.style.hide(axis="index").hide(axis="columns", subset=["_row_type"])
 
     table_styles = [
         {
@@ -343,7 +307,6 @@ def build_player_match_overview(
         na_rep="—",
     )
 
-    # gray rows for compare player
     def _row_bg(row: pd.Series) -> list[str]:
         if row.get("_row_type") == "compare":
             return ["background-color: #f2f2f2;"] * len(row)
@@ -351,7 +314,6 @@ def build_player_match_overview(
 
     styler = styler.apply(_row_bg, axis=1)
 
-    # bars with fixed scales + exact colors
     for col_name in [cols.total_distance, cols.m_per_min, cols.runs, cols.sprints]:
         vmin, vmax = BAR_SCALES[col_name]
         styler = styler.bar(
@@ -363,8 +325,8 @@ def build_player_match_overview(
         )
 
     caption = f"{team_player_name} — {team_name} (per match)"
-    if compare_player_name and str(compare_player_name) != str(team_player_name):
-        caption = f"{team_player_name} vs {compare_player_name} — {team_name} (shared matches)"
+    if compare_active and p2_map:
+        caption = f"{team_player_name} vs {compare_player_name} — {team_name} (player 1 matches, player 2 where available)"
     styler = styler.set_caption(caption)
 
     return display_df.drop(columns=["_row_type"]), styler
