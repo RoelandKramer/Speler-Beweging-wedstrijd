@@ -1,8 +1,3 @@
-# file: app.py
-# run: streamlit run app.py
-
-from __future__ import annotations
-
 from pathlib import Path
 
 import streamlit as st
@@ -15,6 +10,7 @@ from load_table import (
     list_teams,
     load_physical_data,
     styler_to_html,
+    table_to_png_bytes,
     validate_physical_data,
 )
 
@@ -24,7 +20,7 @@ def _load_cached(csv_path: str):
     return load_physical_data(csv_path)
 
 
-def _default_index(options: list[str], desired: str) -> int:
+def _default_index(options: list, desired: str) -> int:
     desired_cf = desired.casefold()
     for i, opt in enumerate(options):
         if str(opt).casefold() == desired_cf:
@@ -39,8 +35,8 @@ def main() -> None:
     csv_path = "physical_data_matches.csv"
     if not Path(csv_path).exists():
         st.error(
-            f"Cannot find {csv_path!r} in the current folder.\n\n"
-            "Place `physical_data_matches.csv` next to `app.py`."
+            "Cannot find {!r} in the current folder.\n\n"
+            "Place `physical_data_matches.csv` next to `app.py`.".format(csv_path)
         )
         st.stop()
 
@@ -52,26 +48,22 @@ def main() -> None:
         st.stop()
 
     teams = list_teams(df)
-    default_team_name = "FC Den Bosch"
-    team_default_idx = _default_index(teams, default_team_name)
+    team_default_idx = _default_index(teams, "FC Den Bosch")
 
     with st.sidebar:
         st.header("Filters")
 
         team = st.selectbox("Team", teams, index=team_default_idx)
-
         players = list_players_for_team(df, team) if team else []
         player_1 = st.selectbox("Player", players, index=0 if players else None)
 
         compare_options = ["(None)"] + players
         compare_selected = st.selectbox("Compare with second player (optional)", compare_options, index=0)
         player_2 = None if compare_selected == "(None)" else compare_selected
-
         if player_2 == player_1:
             player_2 = None
 
         st.markdown("<div style='height: 18px;'></div>", unsafe_allow_html=True)
-
         logo_path = Path("fc_den_bosch_logo.png")
         if logo_path.exists():
             st.image(str(logo_path), use_container_width=True)
@@ -82,32 +74,31 @@ def main() -> None:
 
     try:
         display_df, styler = build_player_match_overview(df, team, player_1, compare_player_name=player_2)
-        html = styler_to_html(styler)
-        height = estimate_table_height_px(n_rows=len(display_df))
-        components.html(html, height=height, scrolling=False)
 
-    
         title_text = "Player Match Physical Overview"
-        caption_text = "{} vs {} — {} (all matches)".format(player_1, player_2, team) if player_2 else "{} — {} (per match)".format(player_1, team)
-        
-        png_bytes = table_to_png_bytes(
-            display_df,
-            title=title_text,
-            caption=caption_text,
-            dpi=200,  # increase to 300 if you want higher-res
+        caption_text = (
+            "{} vs {} — {} (all matches)".format(player_1, player_2, team)
+            if player_2
+            else "{} — {} (per match)".format(player_1, team)
         )
-        
+
+        png_bytes = table_to_png_bytes(display_df, title=title_text, caption=caption_text, dpi=200)
         file_name = "physical_table_{}_{}.png".format(
             str(player_1).replace(" ", "_"),
             ("vs_" + str(player_2).replace(" ", "_")) if player_2 else "solo",
         )
-        
+
         st.download_button(
             label="Download table as PNG (A4 landscape)",
             data=png_bytes,
             file_name=file_name,
             mime="image/png",
         )
+
+        html = styler_to_html(styler)
+        height = estimate_table_height_px(n_rows=len(display_df))
+        components.html(html, height=height, scrolling=False)
+
     except Exception as e:
         st.error(str(e))
 
