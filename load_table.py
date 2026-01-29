@@ -182,11 +182,10 @@ def build_player_match_overview(
     compare_player_name: Optional[str] = None,
 ) -> Tuple[pd.DataFrame, "pd.io.formats.style.Styler"]:
     """
-    - Always show ALL matches for player 1.
-    - If compare player provided: show ALL matches for player 2 too.
-    - Sort by most recent match first.
-    - If same match_id: player 1 row first.
-    - Player 2 rows light blue; player 1 rows white.
+    - Show ALL matches for player 1
+    - If compare selected: show ALL matches for player 2 too
+    - Sort most recent first; if same match -> player 1 first
+    - Player 2 rows light blue; player 1 rows white
     """
     validate_physical_data(df)
     cols = OverviewColumns()
@@ -343,10 +342,7 @@ def _hex_to_rgb(hex_color: str) -> tuple:
     return int(c[0:2], 16), int(c[2:4], 16), int(c[4:6], 16)
 
 
-def _load_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
-    """
-    Best-effort: use DejaVu fonts if available, otherwise fallback to PIL default.
-    """
+def _load_font(size: int, bold: bool = False):
     try:
         if bold:
             return ImageFont.truetype("DejaVuSans-Bold.ttf", size=size)
@@ -355,18 +351,9 @@ def _load_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
         return ImageFont.load_default()
 
 
-# file: load_table.py
-# add/keep these imports near the top:
-from io import BytesIO
-from PIL import Image, ImageDraw, ImageFont
-
-# add these helpers anywhere above table_to_png_bytes:
-
 def _a4_landscape_px(dpi: int) -> tuple:
     # A4: 11.69 x 8.27 inches (landscape)
-    w = int(round(11.69 * dpi))
-    h = int(round(8.27 * dpi))
-    return w, h
+    return int(round(11.69 * dpi)), int(round(8.27 * dpi))
 
 
 def _clamp(v: float, lo: float, hi: float) -> float:
@@ -381,11 +368,9 @@ def table_to_png_bytes(
     dpi: int = 200,
 ) -> bytes:
     """
-    Render table to A4 landscape PNG (auto-scaled), including title + caption.
-    Expects display_df to include `_row_type` + display columns.
+    Render the table to A4 landscape PNG (auto-scaled), including title + caption.
     """
     cols = OverviewColumns()
-
     df = display_df.copy()
     if "_row_type" not in df.columns:
         df["_row_type"] = "primary"
@@ -401,14 +386,13 @@ def table_to_png_bytes(
         cols.sprints,
     ]
 
-    # Base layout (will be scaled to fit A4)
+    # Base layout (scaled)
     base_pad_x = 14
     base_row_h = 52
     base_header_h = 56
     base_bar_w = 220
     base_bar_h = 28
 
-    # Column widths (professional fixed layout)
     base_col_widths = {
         cols.match: 260,
         cols.player: 180,
@@ -423,11 +407,9 @@ def table_to_png_bytes(
     base_table_w = sum(base_col_widths[c] for c in show_cols)
     base_table_h = base_header_h + (len(df) * base_row_h)
 
-    # A4 canvas
     page_w, page_h = _a4_landscape_px(dpi=dpi)
-    margin = int(round(0.35 * dpi))  # ~0.35 inch margin
+    margin = int(round(0.35 * dpi))
 
-    # Title/caption block (base, before scaling)
     base_title_h = 56
     base_caption_h = 34
     base_top_block_h = base_title_h + base_caption_h + 12
@@ -435,12 +417,8 @@ def table_to_png_bytes(
     avail_w = page_w - (2 * margin)
     avail_h = page_h - (2 * margin) - base_top_block_h
 
-    # Scale to fit page (allow a bit of upscale but not too much)
-    scale_w = avail_w / float(base_table_w)
-    scale_h = avail_h / float(base_table_h)
-    scale = _clamp(min(scale_w, scale_h), 0.45, 1.35)
+    scale = _clamp(min(avail_w / float(base_table_w), avail_h / float(base_table_h)), 0.45, 1.35)
 
-    # Scaled metrics
     pad_x = int(round(base_pad_x * scale))
     row_h = int(round(base_row_h * scale))
     header_h = int(round(base_header_h * scale))
@@ -450,36 +428,30 @@ def table_to_png_bytes(
     caption_h = int(round(base_caption_h * scale))
 
     col_widths = {k: int(round(v * scale)) for k, v in base_col_widths.items()}
-
     table_w = sum(col_widths[c] for c in show_cols)
-    table_h = header_h + (len(df) * row_h)
 
-    # Final image
     img = Image.new("RGB", (page_w, page_h), _hex_to_rgb("#FFFFFF"))
     draw = ImageDraw.Draw(img)
 
-    # Fonts (best effort)
     title_font = _load_font(max(18, int(round(34 * scale))), bold=True)
     caption_font = _load_font(max(14, int(round(18 * scale))), bold=False)
     header_font = _load_font(max(14, int(round(18 * scale))), bold=True)
     cell_font = _load_font(max(12, int(round(16 * scale))), bold=False)
 
-    # ---- Title + caption (centered) ----
     y = margin
-    title_w = draw.textlength(title, font=title_font)
-    draw.text(((page_w - title_w) / 2.0, y), title, font=title_font, fill=_hex_to_rgb("#111827"))
+    tw = draw.textlength(title, font=title_font)
+    draw.text(((page_w - tw) / 2.0, y), title, font=title_font, fill=_hex_to_rgb("#111827"))
 
     y += title_h
-    cap_w = draw.textlength(caption, font=caption_font)
-    draw.text(((page_w - cap_w) / 2.0, y), caption, font=caption_font, fill=_hex_to_rgb("#374151"))
+    cw = draw.textlength(caption, font=caption_font)
+    draw.text(((page_w - cw) / 2.0, y), caption, font=caption_font, fill=_hex_to_rgb("#374151"))
 
     y += caption_h + int(round(14 * scale))
 
-    # ---- Table origin (centered horizontally) ----
     table_x0 = margin + max(0, (avail_w - table_w) // 2)
     table_y0 = y
 
-    # Header background + bottom border
+    # header
     draw.rectangle([table_x0, table_y0, table_x0 + table_w, table_y0 + header_h], fill=_hex_to_rgb("#FFFFFF"))
     draw.line(
         [table_x0, table_y0 + header_h, table_x0 + table_w, table_y0 + header_h],
@@ -487,36 +459,25 @@ def table_to_png_bytes(
         width=max(2, int(round(3 * scale))),
     )
 
-    # Header labels
     x = table_x0
     for c in show_cols:
-        draw.text(
-            (x + pad_x, table_y0 + int(round((header_h - 18 * scale) / 2))),
-            c,
-            font=header_font,
-            fill=_hex_to_rgb("#111827"),
-        )
+        draw.text((x + pad_x, table_y0 + int(round((header_h - 18 * scale) / 2))), c, font=header_font, fill=_hex_to_rgb("#111827"))
         x += col_widths[c]
 
-    # Rows
+    # rows
     for i, row in df.iterrows():
         y0 = table_y0 + header_h + i * row_h
         y1 = y0 + row_h
 
         bg = ROW_BG_PLAYER_2 if row.get("_row_type") == "compare" else ROW_BG_PLAYER_1
         draw.rectangle([table_x0, y0, table_x0 + table_w, y1], fill=_hex_to_rgb(bg))
-        draw.line(
-            [table_x0, y1, table_x0 + table_w, y1],
-            fill=_hex_to_rgb("#EEEEEE"),
-            width=max(1, int(round(2 * scale))),
-        )
+        draw.line([table_x0, y1, table_x0 + table_w, y1], fill=_hex_to_rgb("#EEEEEE"), width=max(1, int(round(2 * scale))))
 
         x = table_x0
         for c in show_cols:
             cell_x0 = x
             cell_x1 = x + col_widths[c]
 
-            # Bar columns
             if c in [cols.total_distance, cols.m_per_min, cols.runs, cols.sprints]:
                 v = row.get(c)
                 try:
@@ -532,21 +493,11 @@ def table_to_png_bytes(
                 by0 = y0 + (row_h - bar_h) // 2
                 bx1 = bx0 + int(bar_w * ratio)
                 by1 = by0 + bar_h
-
                 draw.rectangle([bx0, by0, bx1, by1], fill=_hex_to_rgb(BAR_COLORS[c]))
 
-                if c == cols.total_distance:
-                    txt = "{:.3f}".format(v_float) if pd.notna(v) else "—"
-                else:
-                    txt = "{:.0f}".format(v_float) if pd.notna(v) else "—"
-
-                tw = draw.textlength(txt, font=cell_font)
-                draw.text(
-                    (cell_x1 - pad_x - tw, y0 + int(round((row_h - 16 * scale) / 2))),
-                    txt,
-                    font=cell_font,
-                    fill=_hex_to_rgb("#111827"),
-                )
+                txt = "{:.3f}".format(v_float) if (c == cols.total_distance and pd.notna(v)) else ("{:.0f}".format(v_float) if pd.notna(v) else "—")
+                text_w = draw.textlength(txt, font=cell_font)
+                draw.text((cell_x1 - pad_x - text_w, y0 + int(round((row_h - 16 * scale) / 2))), txt, font=cell_font, fill=_hex_to_rgb("#111827"))
             else:
                 val = row.get(c)
                 if pd.isna(val):
@@ -559,16 +510,10 @@ def table_to_png_bytes(
                 else:
                     txt = str(val)
 
-                draw.text(
-                    (cell_x0 + pad_x, y0 + int(round((row_h - 16 * scale) / 2))),
-                    txt,
-                    font=cell_font,
-                    fill=_hex_to_rgb("#111827"),
-                )
+                draw.text((cell_x0 + pad_x, y0 + int(round((row_h - 16 * scale) / 2))), txt, font=cell_font, fill=_hex_to_rgb("#111827"))
 
             x += col_widths[c]
 
     out = BytesIO()
     img.save(out, format="PNG", optimize=True, dpi=(dpi, dpi))
     return out.getvalue()
-
