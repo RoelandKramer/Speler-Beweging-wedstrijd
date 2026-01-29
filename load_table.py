@@ -1,4 +1,5 @@
 # file: load_table.py
+# (UNCHANGED table styling + add 2 helper functions at the bottom)
 
 from __future__ import annotations
 
@@ -49,37 +50,20 @@ BAR_SCALES = {
 
 
 def load_physical_data(csv_path: str) -> pd.DataFrame:
-    """
-    Load physical data from CSV.
-
-    Args:
-        csv_path: Path to physical_data_matches.csv
-
-    Returns:
-        DataFrame with match physical data.
-    """
     return pd.read_csv(csv_path)
 
 
 def validate_physical_data(df: pd.DataFrame) -> None:
-    """
-    Validate required columns exist.
-
-    Raises:
-        ValueError if required columns are missing.
-    """
     missing = REQUIRED_COLUMNS - set(df.columns)
     if missing:
         raise ValueError(f"CSV is missing required columns: {sorted(missing)}")
 
 
 def list_teams(df: pd.DataFrame) -> list[str]:
-    """Return sorted unique teams (club)."""
     return sorted(df["club"].dropna().astype(str).unique().tolist())
 
 
 def list_players_for_team(df: pd.DataFrame, team_name: str) -> list[str]:
-    """Return sorted unique players for a given team."""
     players = (
         df.loc[df["club"].astype(str) == str(team_name), "player_name"]
         .dropna()
@@ -91,12 +75,6 @@ def list_players_for_team(df: pd.DataFrame, team_name: str) -> list[str]:
 
 
 def _parse_home_away_and_opponent(match_name: str, club: str) -> tuple[str, str]:
-    """
-    Parse match_name like: 'PSV vs Go Ahead Eagles' to determine home/away for `club`.
-
-    Returns:
-        (home_away, opponent) where home_away in {'Home','Away','?'}.
-    """
     if not isinstance(match_name, str) or not match_name.strip():
         return "?", "Unknown"
 
@@ -132,9 +110,6 @@ def _parse_home_away_and_opponent(match_name: str, club: str) -> tuple[str, str]
 
 
 def _match_date_from_match_id(match_id: object) -> Optional[pd.Timestamp]:
-    """
-    If match_id looks like YYYYMMDD, parse to datetime; otherwise return None.
-    """
     try:
         s = str(int(match_id))
     except Exception:
@@ -154,16 +129,6 @@ def build_player_match_overview(
     team_name: str,
     team_player_name: str,
 ) -> Tuple[pd.DataFrame, "pd.io.formats.style.Styler"]:
-    """
-    Build a professional per-match physical overview table for a given club and player.
-
-    - Most recent match on top.
-    - Bars use exact colors + fixed scales.
-    - Total distance displayed in km.
-
-    Returns:
-        (display_df, styler)
-    """
     validate_physical_data(df)
 
     filtered = df.loc[
@@ -273,3 +238,26 @@ def build_player_match_overview(
 
     styler = styler.set_caption(f"{team_player_name} — {team_name} (per match)")
     return display_df, styler
+
+
+def styler_to_html(styler: "pd.io.formats.style.Styler") -> str:
+    """
+    Streamlit-friendly HTML wrapper that preserves the Styler's CSS.
+    """
+    html = styler.to_html()
+    return f"""
+    <div style="width: 100%; overflow: visible;">
+      {html}
+    </div>
+    """
+
+
+def estimate_table_height_px(n_rows: int) -> int:
+    """
+    Rough height so the full table shows without scrolling.
+    """
+    header = 48
+    caption = 36
+    row_height = 34
+    padding = 24
+    return header + caption + (n_rows * row_height) + padding
