@@ -204,7 +204,7 @@ def build_player_match_overview(
             "props": [
                 ("font-family", STREAMLIT_FONT_STACK),
                 ("font-weight", "700"),
-                ("font-size", "13.5px"),
+                ("font-size", "14px"),
                 ("text-align", "left"),
                 ("padding", "10px 12px"),
                 ("border-bottom", "2px solid #ddd"),
@@ -214,7 +214,7 @@ def build_player_match_overview(
             "selector": "td",
             "props": [
                 ("font-family", STREAMLIT_FONT_STACK),
-                ("font-size", "13.5px"),
+                ("font-size", "14x"),
                 ("padding", "9px 12px"),
                 ("border-bottom", "1px solid #eee"),
                 ("vertical-align", "middle"),
@@ -225,7 +225,7 @@ def build_player_match_overview(
             "props": [
                 ("caption-side", "top"),
                 ("font-weight", "700"),
-                ("font-size", "13.5px"),
+                ("font-size", "14x"),
                 ("padding", "0 0 10px 0"),
             ],
         },
