@@ -1,7 +1,5 @@
 # file: load_table.py
 
-from __future__ import annotations
-
 from dataclasses import dataclass
 from typing import Optional, Tuple
 
@@ -52,6 +50,7 @@ BAR_SCALES = {
     "Sprints": (0, 20),
 }
 
+ROW_BG_PLAYER_1 = "#FFFFFF"
 ROW_BG_PLAYER_2 = "#E8F2FF"  # light blue
 
 
@@ -62,14 +61,14 @@ def load_physical_data(csv_path: str) -> pd.DataFrame:
 def validate_physical_data(df: pd.DataFrame) -> None:
     missing = REQUIRED_COLUMNS - set(df.columns)
     if missing:
-        raise ValueError(f"CSV is missing required columns: {sorted(missing)}")
+        raise ValueError("CSV is missing required columns: {}".format(sorted(missing)))
 
 
-def list_teams(df: pd.DataFrame) -> list[str]:
+def list_teams(df: pd.DataFrame) -> list:
     return sorted(df["club"].dropna().astype(str).unique().tolist())
 
 
-def list_players_for_team(df: pd.DataFrame, team_name: str) -> list[str]:
+def list_players_for_team(df: pd.DataFrame, team_name: str) -> list:
     players = (
         df.loc[df["club"].astype(str) == str(team_name), "player_name"]
         .dropna()
@@ -80,7 +79,7 @@ def list_players_for_team(df: pd.DataFrame, team_name: str) -> list[str]:
     return sorted(players)
 
 
-def _parse_home_away_and_opponent(match_name: str, club: str) -> tuple[str, str]:
+def _parse_home_away_and_opponent(match_name: str, club: str) -> Tuple[str, str]:
     if not isinstance(match_name, str) or not match_name.strip():
         return "?", "Unknown"
 
@@ -112,10 +111,10 @@ def _parse_home_away_and_opponent(match_name: str, club: str) -> tuple[str, str]
     if club_norm in right_norm:
         return "Away", left
 
-    return "?", f"{left} vs {right}"
+    return "?", "{} vs {}".format(left, right)
 
 
-def _match_date_from_match_id(match_id: object) -> Optional[pd.Timestamp]:
+def _match_date_from_match_id(match_id) -> Optional[pd.Timestamp]:
     try:
         s = str(int(match_id))
     except Exception:
@@ -137,7 +136,7 @@ def _compute_player_match_metrics(df: pd.DataFrame, team_name: str, player_name:
     ].copy()
 
     if filtered.empty:
-        return filtered
+        return filtered.reset_index(drop=True)
 
     filtered["_match_date"] = filtered["match_id"].apply(_match_date_from_match_id)
 
@@ -158,7 +157,8 @@ def _compute_player_match_metrics(df: pd.DataFrame, team_name: str, player_name:
         {
             "match_id": filtered["match_id"],
             "_match_date": filtered["_match_date"],
-            "match_label": filtered.apply(lambda r: f"{r['_ha']} • {r['_opp']}", axis=1),
+            "_match_id_num": pd.to_numeric(filtered["match_id"], errors="coerce"),
+            "match_label": filtered.apply(lambda r: "{} • {}".format(r["_ha"], r["_opp"]), axis=1),
             "player_name": filtered["player_name"].astype(str),
             "position": filtered["position"].astype(str),
             "minutes": minutes,
@@ -179,65 +179,159 @@ def build_player_match_overview(
 ) -> Tuple[pd.DataFrame, "pd.io.formats.style.Styler"]:
     """
     - Always show ALL matches for player 1.
-    - If compare player provided: show ALL matches for player 2 as well.
-    - Sort by match (most recent first).
+    - If compare player provided: show ALL matches for player 2 too.
+    - Sort by most recent match first.
     - If same match_id: player 1 row first.
-    - Player 2 rows are light blue; Player 1 rows are white.
+    - Player 2 rows light blue; player 1 rows white.
     """
     validate_physical_data(df)
     cols = OverviewColumns()
 
     p1 = _compute_player_match_metrics(df, team_name, team_player_name)
     if p1.empty:
-        raise ValueError(f"No rows found for club={team_name!r} player_name={team_player_name!r}")
+        raise ValueError("No rows found for club={!r} player_name={!r}".format(team_name, team_player_name))
+    p1["_player_rank"] = 0
+    p1["_row_type"] = "primary"
 
     compare_active = bool(compare_player_name) and str(compare_player_name) != str(team_player_name)
-    p2 = pd.DataFrame()
     if compare_active:
         p2 = _compute_player_match_metrics(df, team_name, str(compare_player_name))
-        # it's allowed to be empty; we still show full p1
+        if not p2.empty:
+            p2["_player_rank"] = 1
+            p2["_row_type"] = "compare"
+            combined_src = pd.concat([p1, p2], ignore_index=True)
+        else:
+            combined_src = p1.copy()
+    else:
+        combined_src = p1.copy()
 
-    def _to_display(frame: pd.DataFrame, row_type: str, player_rank: int) -> pd.DataFrame:
-        if frame.empty:
-            return frame
-        return pd.DataFrame(
-            {
-                "_row_type": row_type,
-                "_player_rank": player_rank,  # 0 -> player1, 1 -> player2
-                "match_id": frame["match_id"],
-                "_match_date": frame["_match_date"],
-                "_match_id_num": pd.to_numeric(frame["match_id"], errors="coerce"),
-                cols.match: frame["match_label"],
-                cols.player: frame["player_name"],
-                cols.pos: frame["position"],
-                cols.minutes: frame["minutes"],
-                cols.total_distance: frame["total_km"],
-                cols.m_per_min: frame["m_per_min"],
-                cols.runs: frame["runs"],
-                cols.sprints: frame["sprints"],
-            }
-        )
-
-    d1 = _to_display(p1, "primary", 0)
-    d2 = _to_display(p2, "compare", 1) if compare_active else pd.DataFrame()
-
-    combined = pd.concat([d1, d2], ignore_index=True)
-
-    # Sort key: use parsed date when available, else push to bottom using Timestamp.min,
-    # and sort within that by match_id numeric desc.
-    combined["_sort_date"] = combined["_match_date"].fillna(pd.Timestamp.min)
-
-    combined = combined.sort_values(
+    # sort: date desc, then match_id desc, then player_rank asc (player1 first)
+    combined_src["_sort_date"] = combined_src["_match_date"].fillna(pd.Timestamp.min)
+    combined_src = combined_src.sort_values(
         by=["_sort_date", "_match_id_num", "match_id", "_player_rank"],
         ascending=[False, False, False, True],
         kind="mergesort",
     ).reset_index(drop=True)
 
-    # Keep for styling, then drop helper columns from returned df
-    styler_df = combined.copy()
+    # build display table
+    display_df = pd.DataFrame(
+        {
+            "_row_type": combined_src["_row_type"],
+            cols.match: combined_src["match_label"],
+            cols.player: combined_src["player_name"],
+            cols.pos: combined_src["position"],
+            cols.minutes: combined_src["minutes"],
+            cols.total_distance: combined_src["total_km"],
+            cols.m_per_min: combined_src["m_per_min"],
+            cols.runs: combined_src["runs"],
+            cols.sprints: combined_src["sprints"],
+        }
+    )
 
-    # ---- styling ----
-    styler = styler_df.style.hide(axis="index")
-    styler = styler.hide(
-        axis="columns",
-        subset=["_row_type", "_player_rank", "match_id", "_match_date",_]()
+    # styler
+    styler = display_df.style.hide(axis="index").hide(axis="columns", subset=["_row_type"])
+
+    table_styles = [
+        {
+            "selector": "table",
+            "props": [
+                ("border-collapse", "collapse"),
+                ("width", "100%"),
+                ("font-family", STREAMLIT_FONT_STACK),
+            ],
+        },
+        {
+            "selector": "th",
+            "props": [
+                ("font-family", STREAMLIT_FONT_STACK),
+                ("font-weight", "700"),
+                ("font-size", "14px"),
+                ("text-align", "left"),
+                ("padding", "10px 12px"),
+                ("border-bottom", "2px solid #ddd"),
+            ],
+        },
+        {
+            "selector": "td",
+            "props": [
+                ("font-family", STREAMLIT_FONT_STACK),
+                ("font-size", "14px"),
+                ("padding", "9px 12px"),
+                ("border-bottom", "1px solid #eee"),
+                ("vertical-align", "middle"),
+            ],
+        },
+        {
+            "selector": "caption",
+            "props": [
+                ("caption-side", "top"),
+                ("font-weight", "700"),
+                ("font-size", "14px"),
+                ("padding", "0 0 10px 0"),
+            ],
+        },
+    ]
+    styler = styler.set_table_styles(table_styles)
+
+    right_cols = [cols.minutes, cols.total_distance, cols.m_per_min, cols.runs, cols.sprints]
+    styler = styler.set_properties(subset=right_cols, **{"text-align": "right"})
+    styler = styler.set_properties(subset=[cols.match, cols.player, cols.pos], **{"text-align": "left"})
+
+    styler = styler.format(
+        {
+            cols.minutes: "{:.0f}",
+            cols.total_distance: "{:.3f}",
+            cols.m_per_min: "{:.0f}",
+            cols.runs: "{:.0f}",
+            cols.sprints: "{:.0f}",
+        },
+        na_rep="—",
+    )
+
+    def _row_bg(row: pd.Series) -> list:
+        if row.get("_row_type") == "compare":
+            return ["background-color: {};".format(ROW_BG_PLAYER_2)] * len(row)
+        return ["background-color: {};".format(ROW_BG_PLAYER_1)] * len(row)
+
+    styler = styler.apply(_row_bg, axis=1)
+
+    for col_name in [cols.total_distance, cols.m_per_min, cols.runs, cols.sprints]:
+        vmin, vmax = BAR_SCALES[col_name]
+        styler = styler.bar(
+            subset=[col_name],
+            align="left",
+            color=BAR_COLORS[col_name],
+            vmin=vmin,
+            vmax=vmax,
+        )
+
+    caption = "{} — {} (per match)".format(team_player_name, team_name)
+    if compare_active:
+        caption = "{} vs {} — {} (all matches)".format(team_player_name, compare_player_name, team_name)
+    styler = styler.set_caption(caption)
+
+    return display_df.drop(columns=["_row_type"]), styler
+
+
+def styler_to_html(styler: "pd.io.formats.style.Styler") -> str:
+    html = styler.to_html()
+    return """
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+      body {{
+        margin: 0;
+        font-family: {font};
+      }}
+    </style>
+    <div style="width:100%; overflow:visible; font-family:{font};">
+      {table}
+    </div>
+    """.format(font=STREAMLIT_FONT_STACK, table=html)
+
+
+def estimate_table_height_px(n_rows: int) -> int:
+    header = 58
+    caption = 44
+    row_height = 42
+    padding = 28
+    return header + caption + (n_rows * row_height) + padding
