@@ -360,6 +360,9 @@ def _clamp(v: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, v))
 
 
+# file: load_table.py
+# replace ONLY table_to_png_bytes(...) with this
+
 def table_to_png_bytes(
     display_df: pd.DataFrame,
     *,
@@ -369,6 +372,7 @@ def table_to_png_bytes(
 ) -> bytes:
     """
     Render the table to A4 landscape PNG (auto-scaled), including title + caption.
+    Draw row separators AFTER painting rows so the lines are not overwritten.
     """
     cols = OverviewColumns()
     df = display_df.copy()
@@ -438,6 +442,7 @@ def table_to_png_bytes(
     header_font = _load_font(max(14, int(round(18 * scale))), bold=True)
     cell_font = _load_font(max(12, int(round(16 * scale))), bold=False)
 
+    # Title + caption (centered)
     y = margin
     tw = draw.textlength(title, font=title_font)
     draw.text(((page_w - tw) / 2.0, y), title, font=title_font, fill=_hex_to_rgb("#111827"))
@@ -450,28 +455,30 @@ def table_to_png_bytes(
 
     table_x0 = margin + max(0, (avail_w - table_w) // 2)
     table_y0 = y
+    table_x1 = table_x0 + table_w
+    table_y1 = table_y0 + header_h + (len(df) * row_h)
 
-    # header
-    draw.rectangle([table_x0, table_y0, table_x0 + table_w, table_y0 + header_h], fill=_hex_to_rgb("#FFFFFF"))
-    draw.line(
-        [table_x0, table_y0 + header_h, table_x0 + table_w, table_y0 + header_h],
-        fill=_hex_to_rgb("#DDDDDD"),
-        width=max(2, int(round(3 * scale))),
-    )
+    # Header background
+    draw.rectangle([table_x0, table_y0, table_x1, table_y0 + header_h], fill=_hex_to_rgb("#FFFFFF"))
 
+    # Header labels
     x = table_x0
     for c in show_cols:
-        draw.text((x + pad_x, table_y0 + int(round((header_h - 18 * scale) / 2))), c, font=header_font, fill=_hex_to_rgb("#111827"))
+        draw.text(
+            (x + pad_x, table_y0 + int(round((header_h - 18 * scale) / 2))),
+            c,
+            font=header_font,
+            fill=_hex_to_rgb("#111827"),
+        )
         x += col_widths[c]
 
-    # rows
+    # Rows (background + content)
     for i, row in df.iterrows():
         y0 = table_y0 + header_h + i * row_h
         y1 = y0 + row_h
 
         bg = ROW_BG_PLAYER_2 if row.get("_row_type") == "compare" else ROW_BG_PLAYER_1
-        draw.rectangle([table_x0, y0, table_x0 + table_w, y1], fill=_hex_to_rgb(bg))
-        draw.line([table_x0, y1, table_x0 + table_w, y1], fill=_hex_to_rgb("#EEEEEE"), width=max(1, int(round(2 * scale))))
+        draw.rectangle([table_x0, y0, table_x1, y1], fill=_hex_to_rgb(bg))
 
         x = table_x0
         for c in show_cols:
@@ -495,9 +502,20 @@ def table_to_png_bytes(
                 by1 = by0 + bar_h
                 draw.rectangle([bx0, by0, bx1, by1], fill=_hex_to_rgb(BAR_COLORS[c]))
 
-                txt = "{:.3f}".format(v_float) if (c == cols.total_distance and pd.notna(v)) else ("{:.0f}".format(v_float) if pd.notna(v) else "—")
+                if pd.isna(v):
+                    txt = "—"
+                elif c == cols.total_distance:
+                    txt = "{:.3f}".format(v_float)
+                else:
+                    txt = "{:.0f}".format(v_float)
+
                 text_w = draw.textlength(txt, font=cell_font)
-                draw.text((cell_x1 - pad_x - text_w, y0 + int(round((row_h - 16 * scale) / 2))), txt, font=cell_font, fill=_hex_to_rgb("#111827"))
+                draw.text(
+                    (cell_x1 - pad_x - text_w, y0 + int(round((row_h - 16 * scale) / 2))),
+                    txt,
+                    font=cell_font,
+                    fill=_hex_to_rgb("#111827"),
+                )
             else:
                 val = row.get(c)
                 if pd.isna(val):
@@ -510,9 +528,30 @@ def table_to_png_bytes(
                 else:
                     txt = str(val)
 
-                draw.text((cell_x0 + pad_x, y0 + int(round((row_h - 16 * scale) / 2))), txt, font=cell_font, fill=_hex_to_rgb("#111827"))
+                draw.text(
+                    (cell_x0 + pad_x, y0 + int(round((row_h - 16 * scale) / 2))),
+                    txt,
+                    font=cell_font,
+                    fill=_hex_to_rgb("#111827"),
+                )
 
             x += col_widths[c]
+
+    # Row separators + header separator (draw LAST so they remain visible)
+    sep_color = _hex_to_rgb("#E5E7EB")  # similar to app borders
+    sep_w = max(1, int(round(2 * scale)))
+
+    # line under header
+    draw.line([table_x0, table_y0 + header_h, table_x1, table_y0 + header_h], fill=sep_color, width=sep_w)
+
+    # lines between rows
+    for i in range(1, len(df) + 1):
+        y_line = table_y0 + header_h + i * row_h
+        draw.line([table_x0, y_line, table_x1, y_line], fill=sep_color, width=sep_w)
+
+    # Outer border (subtle)
+    border_color = _hex_to_rgb("#D1D5DB")
+    draw.rectangle([table_x0, table_y0, table_x1, table_y1], outline=border_color, width=max(1, int(round(2 * scale))))
 
     out = BytesIO()
     img.save(out, format="PNG", optimize=True, dpi=(dpi, dpi))
