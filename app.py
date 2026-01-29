@@ -1,3 +1,5 @@
+# file: app.py
+
 from pathlib import Path
 
 import streamlit as st
@@ -6,6 +8,7 @@ import streamlit.components.v1 as components
 from load_table import (
     build_player_match_overview,
     estimate_table_height_px,
+    format_last_updated,
     list_players_for_team,
     list_teams,
     load_physical_data,
@@ -13,6 +16,32 @@ from load_table import (
     table_to_png_bytes,
     validate_physical_data,
 )
+
+PASSWORD = "4444"  # set to "" to disable login
+
+
+def require_password() -> None:
+    """
+    Simple password gate.
+    - Logs in once per Streamlit browser session via st.session_state.
+    """
+    if PASSWORD == "":
+        return
+
+    if st.session_state.get("authenticated") is True:
+        return
+
+    st.title("Login")
+    pw = st.text_input("Password", type="password")
+
+    if st.button("Sign in"):
+        if pw == PASSWORD:
+            st.session_state["authenticated"] = True
+            st.rerun()
+        st.error("Incorrect password.")
+        st.stop()
+
+    st.stop()
 
 
 @st.cache_data(show_spinner=False)
@@ -30,6 +59,8 @@ def _default_index(options: list, desired: str) -> int:
 
 def main() -> None:
     st.set_page_config(page_title="Player Match Physical Overview", layout="wide")
+    require_password()
+
     st.title("Player Match Physical Overview")
 
     csv_path = "physical_data_matches.csv"
@@ -49,6 +80,7 @@ def main() -> None:
 
     teams = list_teams(df)
     team_default_idx = _default_index(teams, "FC Den Bosch")
+    last_updated_str = format_last_updated(df)
 
     with st.sidebar:
         st.header("Filters")
@@ -68,32 +100,34 @@ def main() -> None:
         if logo_path.exists():
             st.image(str(logo_path), use_container_width=True)
 
+        st.caption("Last updated: {}".format(last_updated_str))
+
     if not team or not player_1:
         st.info("Select a team and player in the sidebar.")
         st.stop()
 
     try:
         display_df, styler = build_player_match_overview(df, team, player_1, compare_player_name=player_2)
-        
+
         title_text = "Player Match Physical Overview"
         caption_text = (
             "{} vs {} — {} (all matches)".format(player_1, player_2, team)
             if player_2
             else "{} — {} (per match)".format(player_1, team)
         )
-        
-        # Render the HTML table first
+
+        # Table first
         html = styler_to_html(styler)
         height = estimate_table_height_px(n_rows=len(display_df))
         components.html(html, height=height, scrolling=False)
-        
-        # Then generate PNG + show download button underneath
+
+        # Download button under table
         png_bytes = table_to_png_bytes(display_df, title=title_text, caption=caption_text, dpi=200)
         file_name = "physical_table_{}_{}.png".format(
             str(player_1).replace(" ", "_"),
             ("vs_" + str(player_2).replace(" ", "_")) if player_2 else "solo",
         )
-        
+
         st.download_button(
             label="Download Table as PNG",
             data=png_bytes,
