@@ -10853,3 +10853,371 @@ player_id,player_name,match_id,match_name,club,Minutes,total_distance,high_inten
 2400,Ayoub Oufkir,20260112,Jong AZ vs Jong Ajax,Jong AZ,62.49313156541542,8507.19,1235.53,447.19,31.0,16.0,RW,KKD
 248,Nick Twisk,20260112,Jong AZ vs Jong Ajax,Jong AZ,96.2627171215881,12414.04,768.35,123.46,33.0,5.0,DM,KKD
 259,Sem Dekkers,20260112,Jong AZ vs Jong Ajax,Jong AZ,96.26674427629025,12403.97,1277.03,260.39,49.0,10.0,LB,KKD
+130,Kenzo Goudmijn,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,45.6044921875,5603.88,354.1,67.06,14.0,2.0,CM,Eredivisie
+1439,Giovanni van Zwam,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,26.119059785385794,3066.9,204.44,52.14,6.0,2.0,CB,Eredivisie
+1464,Mats Deijl,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,93.64728588661039,11645.04,967.81,133.05,39.0,7.0,RB,Eredivisie
+1685,Milan Smit,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,93.64632132132134,12473.69,1226.71,272.27,54.0,14.0,CF,Eredivisie
+1809,Dean James,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,26.324494452750017,3345.58,393.44,108.88,15.0,4.0,LB,Eredivisie
+2027,Jakob Breum,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,67.5297619047619,9643.25,747.9399999999999,26.29,36.0,1.0,AM,Eredivisie
+2029,Victor Edvardsen,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,48.041643309041405,5998.96,551.6899999999999,168.48,15.0,10.0,CF,Eredivisie
+2030,Thibo Baeten,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,48.04375685018127,5698.47,505.09000000000003,200.18,12.0,8.0,CF,Eredivisie
+2153,Jaden Slory,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,45.60436058700209,5438.32,646.2,142.08,25.0,6.0,RW,Eredivisie
+2211,Mathis Suray,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,93.6504307488403,11305.48,1055.06,158.49,35.0,10.0,LW,Eredivisie
+2331,Aske Adelgaard,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,67.32194692860284,9184.06,1006.04,241.75,33.0,10.0,LB,Eredivisie
+2332,Jari De Busser,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,93.64953751284688,4556.05,0.0,0.0,0.0,0.0,GK,Eredivisie
+241,Melle Meulensteen,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,93.6469258196365,10768.46,706.5500000000001,120.71,26.0,6.0,DM,Eredivisie
+5,Evert Linthorst,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,93.64910240569809,12885.18,1075.52,139.05,43.0,7.0,CM,Eredivisie
+563,Joris Kramer,20260117,Ajax vs Go Ahead Eagles,Go Ahead Eagles,93.6461191179024,10786.16,685.75,77.6,30.0,4.0,CB,Eredivisie
+1625,Youri Regeer,20260117,Ajax vs Go Ahead Eagles,Ajax,93.64512060539177,11879.82,960.6500000000001,258.08,32.0,10.0,CM,Eredivisie
+1792,Oliver Edvardsen,20260117,Ajax vs Go Ahead Eagles,Ajax,9.324845055241175,1384.18,162.64000000000001,9.87,7.0,1.0,LW,Eredivisie
+1923,Mika Godts,20260117,Ajax vs Go Ahead Eagles,Ajax,84.18133356637246,9632.87,910.81,267.21,33.0,12.0,LW,Eredivisie
+2063,Josip Sutalo,20260117,Ajax vs Go Ahead Eagles,Ajax,18.723147616312463,2281.79,113.92,29.17,5.0,2.0,CB,Eredivisie
+2066,Anton Gaaei,20260117,Ajax vs Go Ahead Eagles,Ajax,93.64909456740442,11635.9,1364.21,442.57,27.0,25.0,RB,Eredivisie
+2381,Jorthy Mokio,20260117,Ajax vs Go Ahead Eagles,Ajax,18.75989365742499,2469.74,151.39,10.07,9.0,1.0,DM,Eredivisie
+2388,Aaron Bouwman,20260117,Ajax vs Go Ahead Eagles,Ajax,93.64506945043568,10854.4,406.75,46.25,17.0,5.0,CB,Eredivisie
+2408,Rayane Bounida,20260117,Ajax vs Go Ahead Eagles,Ajax,83.8976719415703,11027.51,1114.85,254.2,32.0,14.0,AM,Eredivisie
+2413,Sean Steur,20260117,Ajax vs Go Ahead Eagles,Ajax,74.88941900731051,9731.88,640.71,185.66,22.0,7.0,CM,Eredivisie
+2415,Lucas Oliveira Rosa,20260117,Ajax vs Go Ahead Eagles,Ajax,93.64908998128934,11011.26,693.77,130.44,32.0,6.0,RB,Eredivisie
+2519,Vítezslav Jaros,20260117,Ajax vs Go Ahead Eagles,Ajax,93.64344468692295,5578.34,8.19,0.0,0.0,0.0,GK,Eredivisie
+2520,Raúl Moro,20260117,Ajax vs Go Ahead Eagles,Ajax,9.470323283690519,1303.59,265.65,76.12,9.0,4.0,LW,Eredivisie
+2522,Oscar Gloukh,20260117,Ajax vs Go Ahead Eagles,Ajax,9.750352923694182,1312.3,136.85,30.82,7.0,1.0,AM,Eredivisie
+284,Ko Itakura,20260117,Ajax vs Go Ahead Eagles,Ajax,93.64982909229018,9863.2,388.26,84.01,16.0,4.0,CB,Eredivisie
+413,Kasper Dolberg,20260117,Ajax vs Go Ahead Eagles,Ajax,84.32218024824608,9374.94,672.0,253.78,15.0,14.0,CF,Eredivisie
+750,Davy Klaassen,20260117,Ajax vs Go Ahead Eagles,Ajax,74.92398216504641,10250.35,947.8,162.12,29.0,11.0,CM,Eredivisie
+131,Danny Bakker,20260117,Excelsior vs Telstar,Telstar,96.17327949438202,10956.06,828.11,186.6,23.0,10.0,CB,Eredivisie
+1631,Nils Rossen,20260117,Excelsior vs Telstar,Telstar,83.27613456762248,11064.9,911.12,84.01,40.0,3.0,DM,Eredivisie
+1802,Patrick Brouwer,20260117,Excelsior vs Telstar,Telstar,74.64799239376875,10206.62,1252.33,287.98,43.0,16.0,LW,Eredivisie
+1955,Jochem Ritmeester van de Kamp,20260117,Excelsior vs Telstar,Telstar,96.17523173896923,12969.23,1699.59,447.25,58.0,20.0,AM,Eredivisie
+1958,Tyrese Noslin,20260117,Excelsior vs Telstar,Telstar,74.43679397525551,9686.46,1056.65,268.26,30.0,11.0,CM,Eredivisie
+2454,Ronald Koeman,20260117,Excelsior vs Telstar,Telstar,96.17822920659256,5018.58,15.120000000000001,1.22,0.0,0.0,GK,Eredivisie
+2455,Devon Koswal,20260117,Excelsior vs Telstar,Telstar,96.1687539994515,10519.9,622.28,188.57,16.0,7.0,CB,Eredivisie
+2458,Guus Offerhaus,20260117,Excelsior vs Telstar,Telstar,96.17075050084759,12481.04,859.46,133.19,39.0,5.0,CB,Eredivisie
+2465,Adil Lechkar,20260117,Excelsior vs Telstar,Telstar,21.73579763222894,2552.0,382.71999999999997,119.63,12.0,5.0,RB,Eredivisie
+2528,Soufiane Hetli,20260117,Excelsior vs Telstar,Telstar,21.522082752208274,2777.64,239.06,23.31,12.0,1.0,CF,Eredivisie
+2530,Milan Zonneveld,20260117,Excelsior vs Telstar,Telstar,79.80463990001562,10216.59,998.52,139.35,37.0,11.0,CF,Eredivisie
+2532,Dylan Mertens,20260117,Excelsior vs Telstar,Telstar,12.898044472480683,1635.73,252.82999999999998,109.01,4.0,5.0,AM,Eredivisie
+2533,Neville Ogidi Nwankwo,20260117,Excelsior vs Telstar,Telstar,96.17394929953302,11533.18,1055.04,295.34,37.0,14.0,CB,Eredivisie
+2554,Kay Tejan,20260117,Excelsior vs Telstar,Telstar,16.36944890315677,1835.67,232.75,79.26,6.0,3.0,CF,Eredivisie
+267,Jeff Hardeveld,20260117,Excelsior vs Telstar,Telstar,96.1699604743083,11435.57,977.54,245.42,37.0,9.0,CM,Eredivisie
+1521,Ilias Bronkhorst,20260117,Excelsior vs Telstar,Excelsior,96.16822817345162,11598.85,1237.04,379.15,35.0,18.0,CB,Eredivisie
+1570,Lennard Hartjes,20260117,Excelsior vs Telstar,Excelsior,67.53078007518796,8622.33,549.01,120.23,23.0,5.0,DM,Eredivisie
+1577,Arthur Zagré,20260117,Excelsior vs Telstar,Excelsior,67.5969636725104,7480.28,608.38,137.54,23.0,7.0,LB,Eredivisie
+1611,Rick Meissen,20260117,Excelsior vs Telstar,Excelsior,96.16825275980206,10105.36,478.65,139.2,18.0,4.0,CB,Eredivisie
+1626,Gyan de Regt,20260117,Excelsior vs Telstar,Excelsior,21.531860662701785,2787.73,419.62,120.41,12.0,5.0,LW,Eredivisie
+1691,Miliano Jonathans,20260117,Excelsior vs Telstar,Excelsior,21.221723593451344,2553.61,293.91,114.67,8.0,3.0,RW,Eredivisie
+1722,Stijn van Gassel,20260117,Excelsior vs Telstar,Excelsior,96.175343896918,5523.35,36.01,20.68,0.0,1.0,GK,Eredivisie
+1783,Noah Naujoks,20260117,Excelsior vs Telstar,Excelsior,82.22356334927504,10831.31,980.21,288.2,26.0,12.0,AM,Eredivisie
+1801,Derensili Sanches Fernandes,20260117,Excelsior vs Telstar,Excelsior,74.95054852320675,8881.64,1037.19,253.44,29.0,12.0,RW,Eredivisie
+1885,Irakli Yegoian,20260117,Excelsior vs Telstar,Excelsior,96.16924873491632,12352.94,929.9399999999999,149.65,38.0,11.0,CM,Eredivisie
+2017,Casper Widell,20260117,Excelsior vs Telstar,Excelsior,96.17186392629341,10855.88,483.65999999999997,91.15,21.0,6.0,CB,Eredivisie
+2319,Chris-Kévin Nadje,20260117,Excelsior vs Telstar,Excelsior,28.64047619047619,3608.7,275.79,81.21,12.0,3.0,AM,Eredivisie
+240,Emil Hansson,20260117,Excelsior vs Telstar,Excelsior,74.63872789418932,10044.88,958.33,131.84,45.0,5.0,LW,Eredivisie
+2487,Jerolldino Bergraaf,20260117,Excelsior vs Telstar,Excelsior,96.17023247198296,10383.5,1353.1,409.93,39.0,14.0,CF,Eredivisie
+43,Mike van Duinen,20260117,Excelsior vs Telstar,Excelsior,13.94666986487567,1744.31,176.91,54.1,6.0,3.0,CF,Eredivisie
+88,Simon Janssen,20260117,Excelsior vs Telstar,Excelsior,28.571284125379172,3673.41,445.19,96.77,12.0,6.0,LB,Eredivisie
+1779,Ryan Flamingo,20260117,Fortuna Sittard vs PSV,PSV,23.867155894251574,2536.84,148.15,0.0,9.0,0.0,CB,Eredivisie
+195,Joey Veerman,20260117,Fortuna Sittard vs PSV,PSV,95.03966515412299,12147.97,782.41,27.63,42.0,2.0,CM,Eredivisie
+2359,Ivan Perisic,20260117,Fortuna Sittard vs PSV,PSV,95.03569530558016,10729.53,975.77,275.3,32.0,11.0,LW,Eredivisie
+2396,Esmir Bajraktarevic,20260117,Fortuna Sittard vs PSV,PSV,71.17031079835805,8495.6,855.34,283.39,26.0,13.0,RW,Eredivisie
+2467,Matej Kovár,20260117,Fortuna Sittard vs PSV,PSV,95.04155892131512,5145.55,51.019999999999996,7.66,2.0,1.0,GK,Eredivisie
+2468,Yarek Gasiorowski,20260117,Fortuna Sittard vs PSV,PSV,95.03515553101418,10326.52,713.28,213.41,20.0,11.0,CB,Eredivisie
+2472,Kiliann Sildillia,20260117,Fortuna Sittard vs PSV,PSV,95.03688631050308,10975.81,766.96,175.62,30.0,8.0,RB,Eredivisie
+2542,Dennis Man,20260117,Fortuna Sittard vs PSV,PSV,23.631475702184574,2650.27,206.68,84.75,5.0,4.0,RW,Eredivisie
+2546,Paul Wanner,20260117,Fortuna Sittard vs PSV,PSV,89.21696801112657,11546.46,816.12,235.47,24.0,9.0,AM,Eredivisie
+2603,Nicolas Verkooijen,20260117,Fortuna Sittard vs PSV,PSV,5.818444384739387,866.25,168.99,47.44,5.0,2.0,CB,Eredivisie
+273,Mauro Jaqueson Júnior Ferreira dos Santos,20260117,Fortuna Sittard vs PSV,PSV,95.03746208705633,11593.62,1118.89,236.82,44.0,10.0,LB,Eredivisie
+390,Jerdy Schouten,20260117,Fortuna Sittard vs PSV,PSV,95.04238492980272,10696.07,622.36,141.89,20.0,9.0,DM,Eredivisie
+440,Guus Til,20260117,Fortuna Sittard vs PSV,PSV,95.03493632707776,11343.37,907.48,180.89,36.0,8.0,AM,Eredivisie
+645,Couhaib Driouech,20260117,Fortuna Sittard vs PSV,PSV,71.40653907496012,8954.38,878.06,285.44,30.0,11.0,LW,Eredivisie
+101,Kristoffer Peterson,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,71.01314137440362,8483.94,877.06,313.77,26.0,10.0,LW,Eredivisie
+1429,Shawn Adewoye,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,95.0364727608495,10292.45,460.04999999999995,81.52,14.0,5.0,CB,Eredivisie
+1437,Neraysho Kasanwirjo,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,95.03655473909403,10217.38,581.19,106.09,21.0,5.0,RB,Eredivisie
+1503,Dimitrios Limnios,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,46.00404889228419,6021.93,575.83,111.15,24.0,6.0,RW,Eredivisie
+1510,Mattijs Branderhorst,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,95.04180298073427,5229.2,26.72,0.0,1.0,0.0,GK,Eredivisie
+1511,Iván Márquez,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,95.0348204570185,9607.07,257.85,73.12,7.0,5.0,CB,Eredivisie
+1591,Ivo Daniel Ferreira Mendonça Pinto,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,82.08984140591514,9575.78,706.5,182.27,23.0,10.0,RB,Eredivisie
+194,Alen Halilovic,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,12.950446262551134,1392.95,59.0,0.0,2.0,0.0,AM,Eredivisie
+1956,Lance Duijvestijn,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,82.08905210006886,10729.86,1073.8400000000001,263.77,34.0,11.0,AM,Eredivisie
+2163,Tristan Schenkhuizen,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,13.099835390946502,1591.63,245.23000000000002,91.68,2.0,5.0,CB,Eredivisie
+2203,Philip Brittijn,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,95.04128191200434,12247.97,842.59,198.39,27.0,6.0,CM,Eredivisie
+2306,Samuel Bastien,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,12.951281125947311,1435.52,119.33,29.25,3.0,2.0,CM,Eredivisie
+2376,Édouard Michut,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,81.93992656823686,10489.13,583.3,133.53,23.0,8.0,CM,Eredivisie
+372,Kaj Sierhuis,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,95.03672727272728,10454.04,867.89,236.16,27.0,11.0,CF,Eredivisie
+40,Paul Gladon,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,24.02886913297008,2513.66,187.45,46.45,8.0,2.0,CF,Eredivisie
+970,Syb van Ottele,20260117,Fortuna Sittard vs PSV,Fortuna Sittard,49.03573073026982,5324.79,284.99,91.34,9.0,5.0,CB,Eredivisie
+1515,Dirk Proper,20260117,NAC Breda vs N.E.C.,N.E.C.,69.97885434748305,8869.12,656.27,90.13,31.0,5.0,CM,KKD
+155,Eli Dasa,20260117,NAC Breda vs N.E.C.,N.E.C.,99.37179029957206,11145.54,853.36,246.24,30.0,11.0,RB,KKD
+1693,Philippe Sandler,20260117,NAC Breda vs N.E.C.,N.E.C.,99.3730560061063,10415.29,532.49,113.49,23.0,5.0,CB,KKD
+1817,Ahmetcan Kaplan,20260117,NAC Breda vs N.E.C.,N.E.C.,99.3749885310579,10830.88,621.29,143.82,22.0,7.0,CB,KKD
+2011,Koki Ogawa,20260117,NAC Breda vs N.E.C.,N.E.C.,66.1531176006314,7543.44,585.81,51.92,30.0,2.0,CF,KKD
+2013,Brayann Pereira,20260117,NAC Breda vs N.E.C.,N.E.C.,33.241411885949844,3870.63,499.16999999999996,238.47,7.0,10.0,RB,KKD
+2073,Kodai Sano,20260117,NAC Breda vs N.E.C.,N.E.C.,99.37394378341092,11525.39,759.1500000000001,147.33,31.0,6.0,AM,KKD
+2128,Tjaronn Chery,20260117,NAC Breda vs N.E.C.,N.E.C.,99.371984626707,12152.2,794.77,66.41,42.0,4.0,AM,KKD
+2196,Basar Önal,20260117,NAC Breda vs N.E.C.,N.E.C.,89.81576504346359,10642.27,1064.33,273.44,36.0,12.0,LW,KKD
+2227,Sami Ouaissa,20260117,NAC Breda vs N.E.C.,N.E.C.,66.13271734565309,7873.1,876.66,340.37,24.0,13.0,RW,KKD
+2477,Gonzalo Crettaz,20260117,NAC Breda vs N.E.C.,N.E.C.,99.37787234042553,5838.45,175.97,81.6,3.0,4.0,GK,KKD
+2563,Deveron Fonville,20260117,NAC Breda vs N.E.C.,N.E.C.,33.221565466595024,3709.52,285.35,98.32,7.0,6.0,LB,KKD
+2564,Darko Nejasmic,20260117,NAC Breda vs N.E.C.,N.E.C.,29.399203119701593,3467.93,208.71,15.93,7.0,1.0,DM,KKD
+2565,Noé Lebreton,20260117,NAC Breda vs N.E.C.,N.E.C.,99.37403314917127,12590.69,1181.8,269.51,41.0,14.0,DM,KKD
+968,Virgil Misidjan,20260117,NAC Breda vs N.E.C.,N.E.C.,9.56019328501208,1147.51,174.34,63.91,2.0,4.0,LW,KKD
+1468,Boyd Lucassen,20260117,NAC Breda vs N.E.C.,NAC Breda,32.81946568318791,3648.54,260.08,68.94,9.0,4.0,RB,Eredivisie
+1660,Kamal Sowah,20260117,NAC Breda vs N.E.C.,NAC Breda,99.37836490528414,11961.18,1105.81,404.34,29.0,18.0,RW,Eredivisie
+1708,Charles-Andreas Brym,20260117,NAC Breda vs N.E.C.,NAC Breda,99.37147950089125,11149.48,1109.8200000000002,334.87,27.0,16.0,CF,Eredivisie
+2192,Rio Hillen,20260117,NAC Breda vs N.E.C.,NAC Breda,99.3709861295839,10459.79,533.65,124.54,21.0,6.0,CB,Eredivisie
+2249,Daniel Bielica,20260117,NAC Breda vs N.E.C.,NAC Breda,99.38153789686181,5415.3,11.58,0.0,1.0,0.0,GK,Eredivisie
+2251,Leo Greiml,20260117,NAC Breda vs N.E.C.,NAC Breda,66.55673693858846,7261.34,275.49,68.8,8.0,3.0,CB,Eredivisie
+2252,Max Balard,20260117,NAC Breda vs N.E.C.,NAC Breda,99.37847476225312,10868.03,512.28,31.69,27.0,1.0,DM,Eredivisie
+2293,Juho Talvitie,20260117,NAC Breda vs N.E.C.,NAC Breda,24.688876202903277,3027.35,203.14000000000001,42.03,9.0,2.0,RW,Eredivisie
+2544,Lewis Holtby,20260117,NAC Breda vs N.E.C.,NAC Breda,91.9224582227081,11771.59,845.88,55.99,38.0,4.0,CM,Eredivisie
+2588,Moussa Soumano,20260117,NAC Breda vs N.E.C.,NAC Breda,74.6856303908974,8139.24,572.89,100.8,24.0,6.0,LW,Eredivisie
+2596,Denis Odoi,20260117,NAC Breda vs N.E.C.,NAC Breda,99.37830639235855,10820.31,738.0999999999999,285.26,16.0,12.0,RB,Eredivisie
+2609,André Ayew,20260117,NAC Breda vs N.E.C.,NAC Breda,24.607508532423207,2595.6,249.71,28.9,10.0,1.0,LW,Eredivisie
+433,Sydney van Hooijdonk,20260117,NAC Breda vs N.E.C.,NAC Breda,74.76495297233129,8187.51,574.1600000000001,92.5,22.0,6.0,CF,Eredivisie
+62,Clint Leemans,20260117,NAC Breda vs N.E.C.,NAC Breda,7.451428157169784,1027.85,98.69,35.81,4.0,1.0,CM,Eredivisie
+681,Boy Kemper,20260117,NAC Breda vs N.E.C.,NAC Breda,99.37444512142048,11417.13,1129.88,338.62,29.0,16.0,LB,Eredivisie
+1548,Mees de Wit,20260117,PEC Zwolle vs AZ,AZ,97.12848837209302,11694.27,1000.8499999999999,206.8,41.0,9.0,LB,Eredivisie
+1866,Rome-Jayden Owusu-Oduro,20260117,PEC Zwolle vs AZ,AZ,97.13145631067962,5002.27,40.28,0.0,2.0,0.0,GK,Eredivisie
+1889,Wouter Goes,20260117,PEC Zwolle vs AZ,AZ,97.12713488294592,11658.17,521.69,106.19,22.0,5.0,CB,Eredivisie
+2023,Alexandre Manuel Penetra Correia,20260117,PEC Zwolle vs AZ,AZ,67.66950062645428,7561.39,441.92,77.76,16.0,2.0,CB,Eredivisie
+2048,Troy Parrott,20260117,PEC Zwolle vs AZ,AZ,97.1271600300526,10342.1,1198.99,264.31,44.0,14.0,CF,Eredivisie
+2084,Ibrahim Sadiq,20260117,PEC Zwolle vs AZ,AZ,50.14437563545614,5425.12,563.19,147.51,15.0,6.0,RW,Eredivisie
+2149,Kees Smit,20260117,PEC Zwolle vs AZ,AZ,97.13339700732251,12203.84,886.7,227.51,30.0,13.0,CM,Eredivisie
+2369,Elijah Dijkstra,20260117,PEC Zwolle vs AZ,AZ,29.41549053356282,3418.08,255.89999999999998,109.98,6.0,3.0,RB,Eredivisie
+2428,Wassim Bouziane,20260117,PEC Zwolle vs AZ,AZ,13.621801727684081,1655.73,211.43,98.77,6.0,2.0,LW,Eredivisie
+2521,Mateo Chávez,20260117,PEC Zwolle vs AZ,AZ,67.71600554304521,7818.49,803.94,181.48,26.0,12.0,LB,Eredivisie
+2523,Isak Jensen,20260117,PEC Zwolle vs AZ,AZ,46.98386973472976,6145.96,484.84000000000003,95.98,24.0,4.0,LW,Eredivisie
+2556,Weslley Pinto Batista,20260117,PEC Zwolle vs AZ,AZ,83.50929426591053,10602.34,924.54,183.18,36.0,8.0,RW,Eredivisie
+2557,Matej Sín,20260117,PEC Zwolle vs AZ,AZ,54.50557821035624,7084.09,642.8100000000001,117.96,26.0,6.0,AM,Eredivisie
+500,Jizz Hornkamp,20260117,PEC Zwolle vs AZ,AZ,29.458102655531576,3139.35,350.55,75.69,12.0,3.0,CF,Eredivisie
+706,Sven Mijnans,20260117,PEC Zwolle vs AZ,AZ,42.623924879665424,5401.73,345.36,18.93,17.0,2.0,AM,Eredivisie
+943,Peer Koopmeiners,20260117,PEC Zwolle vs AZ,AZ,97.13365233891594,11773.57,988.1099999999999,157.31,38.0,8.0,DM,Eredivisie
+1445,Zico Buurmeester,20260117,PEC Zwolle vs AZ,PEC Zwolle,46.98272153713794,6553.15,567.63,101.14,16.0,6.0,CM,Eredivisie
+1456,Kaj de Rooij,20260117,PEC Zwolle vs AZ,PEC Zwolle,25.126287001287,3123.7,171.37,36.11,7.0,3.0,LW,Eredivisie
+1873,Olivier Aertssen,20260117,PEC Zwolle vs AZ,PEC Zwolle,32.30873330927463,3581.1,327.2,82.63,14.0,4.0,CB,Eredivisie
+1947,Anselmo MacNulty,20260117,PEC Zwolle vs AZ,PEC Zwolle,97.13078251385984,10687.3,794.3599999999999,197.8,27.0,10.0,CB,Eredivisie
+200,Sherel Floranus,20260117,PEC Zwolle vs AZ,PEC Zwolle,97.13283842794759,11121.71,886.9300000000001,271.3,27.0,13.0,RB,Eredivisie
+2001,Nick Fichtinger,20260117,PEC Zwolle vs AZ,PEC Zwolle,3.8099992548990382,511.34,13.65,0.0,1.0,0.0,CB,Eredivisie
+2095,Tristan Gooijer,20260117,PEC Zwolle vs AZ,PEC Zwolle,97.1336100317909,10999.41,835.1,199.97,33.0,9.0,RB,Eredivisie
+2104,Tom de Graaff,20260117,PEC Zwolle vs AZ,PEC Zwolle,97.125768321513,6162.63,17.56,0.0,0.0,0.0,GK,Eredivisie
+219,Ryan Thomas,20260117,PEC Zwolle vs AZ,PEC Zwolle,97.13085634502018,12522.11,1075.39,145.04,46.0,5.0,CM,Eredivisie
+2322,Simon Graves,20260117,PEC Zwolle vs AZ,PEC Zwolle,64.82161361954108,7005.92,300.96,4.07,19.0,0.0,CB,Eredivisie
+2346,Jamiro Gregory Monteiro Alvarenga,20260117,PEC Zwolle vs AZ,PEC Zwolle,50.14856418918919,5937.59,546.41,138.71,13.0,7.0,AM,Eredivisie
+2514,Koen Kostons,20260117,PEC Zwolle vs AZ,PEC Zwolle,97.13042355371901,11282.67,1223.78,387.24,39.0,16.0,CF,Eredivisie
+2561,Shola Shoretire,20260117,PEC Zwolle vs AZ,PEC Zwolle,97.12940864492178,10988.25,1022.41,348.76,24.0,15.0,AM,Eredivisie
+473,Younes Namli,20260117,PEC Zwolle vs AZ,PEC Zwolle,72.00201938610662,8913.85,732.47,119.53,31.0,6.0,AM,Eredivisie
+824,Thijs Oosting,20260117,PEC Zwolle vs AZ,PEC Zwolle,93.32349055870696,12009.8,906.49,234.97,28.0,12.0,LW,Eredivisie
+125,Dani de Wit,20260118,FC Volendam vs FC Utrecht,FC Utrecht,50.05975447419021,6769.08,578.67,109.74,20.0,5.0,AM,Eredivisie
+1514,Souffian El Karouani,20260118,FC Volendam vs FC Utrecht,FC Utrecht,96.09437665329806,11261.3,1034.78,249.43,36.0,10.0,LB,Eredivisie
+1572,Mike van der Hoorn,20260118,FC Volendam vs FC Utrecht,FC Utrecht,8.736728714236468,1013.81,44.300000000000004,1.21,3.0,0.0,CB,Eredivisie
+1754,Vasilios Barkas,20260118,FC Volendam vs FC Utrecht,FC Utrecht,96.09300311742292,5548.41,38.71,0.0,3.0,0.0,GK,Eredivisie
+1757,Can Bozdogan,20260118,FC Volendam vs FC Utrecht,FC Utrecht,36.505754134593396,4789.92,304.02,27.39,14.0,1.0,CM,Eredivisie
+2043,Gjivai Zechiël,20260118,FC Volendam vs FC Utrecht,FC Utrecht,46.039611062405356,5776.59,490.79,82.88,14.0,5.0,DM,Eredivisie
+2052,Yoann Cathline,20260118,FC Volendam vs FC Utrecht,FC Utrecht,96.09639088410039,10836.79,1113.5900000000001,318.86,31.0,15.0,LW,Eredivisie
+2118,Adrian Blake,20260118,FC Volendam vs FC Utrecht,FC Utrecht,8.71486908479462,1088.4,78.27000000000001,32.27,1.0,2.0,LW,Eredivisie
+2226,Matisse Didden,20260118,FC Volendam vs FC Utrecht,FC Utrecht,96.09714185516395,10960.84,767.4100000000001,223.22,19.0,12.0,CB,Eredivisie
+228,Nick Viergever,20260118,FC Volendam vs FC Utrecht,FC Utrecht,75.6750360505556,8921.33,480.35,96.15,15.0,5.0,CB,Eredivisie
+2298,Alonzo Engwanda,20260118,FC Volendam vs FC Utrecht,FC Utrecht,87.36476105765342,10804.4,1005.19,233.46,31.0,12.0,DM,Eredivisie
+2326,Miguel Rodríguez,20260118,FC Volendam vs FC Utrecht,FC Utrecht,87.38225312474133,10556.65,1219.45,264.51,38.0,14.0,RW,Eredivisie
+2616,Oualid Agougil,20260118,FC Volendam vs FC Utrecht,FC Utrecht,20.424633559396195,2800.83,202.72,7.24,12.0,1.0,CM,Eredivisie
+453,Siebe Horemans,20260118,FC Volendam vs FC Utrecht,FC Utrecht,96.09806224310042,11455.85,1249.65,332.47,43.0,17.0,RB,Eredivisie
+942,Victor Jensen,20260118,FC Volendam vs FC Utrecht,FC Utrecht,59.59533789249209,8104.37,686.5,50.83,34.0,3.0,AM,Eredivisie
+960,Sébastien Haller,20260118,FC Volendam vs FC Utrecht,FC Utrecht,96.09653155035521,11497.95,869.23,144.11,37.0,8.0,CF,Eredivisie
+1773,Kayne van Oevelen,20260118,FC Volendam vs FC Utrecht,FC Volendam,96.10628342245988,5751.0,18.32,0.54,1.0,0.0,GK,Eredivisie
+1857,Déron Payne,20260118,FC Volendam vs FC Utrecht,FC Volendam,25.85762805213879,2816.93,231.07,68.99,8.0,3.0,RB,Eredivisie
+2045,Dave Kwakman,20260118,FC Volendam vs FC Utrecht,FC Volendam,70.12263400668044,8817.22,433.76,39.63,16.0,2.0,DM,Eredivisie
+2075,Yannick Leliendal,20260118,FC Volendam vs FC Utrecht,FC Volendam,96.09465891062929,10902.9,902.8100000000001,269.12,23.0,14.0,LB,Eredivisie
+2169,Joel Ideho,20260118,FC Volendam vs FC Utrecht,FC Volendam,96.09608880409331,11080.84,1146.6100000000001,389.42,34.0,19.0,LW,Eredivisie
+2378,Precious Ugwu,20260118,FC Volendam vs FC Utrecht,FC Volendam,70.24182638105974,8722.63,676.97,96.93,22.0,6.0,CB,Eredivisie
+2382,Nick Verschuren,20260118,FC Volendam vs FC Utrecht,FC Volendam,96.09582971329279,11060.63,405.76,50.12,17.0,4.0,CB,Eredivisie
+2500,Mawouna Amevor,20260118,FC Volendam vs FC Utrecht,FC Volendam,96.09585588949038,10295.71,226.95999999999998,4.17,13.0,0.0,CB,Eredivisie
+2501,Ozan Kökçü,20260118,FC Volendam vs FC Utrecht,FC Volendam,96.09516757599376,12329.01,962.38,239.03,31.0,13.0,LW,Eredivisie
+2503,Aurelio Oehlers,20260118,FC Volendam vs FC Utrecht,FC Volendam,60.534603724556085,6988.72,734.54,271.47,18.0,10.0,RW,Eredivisie
+2504,Alex Plat,20260118,FC Volendam vs FC Utrecht,FC Volendam,25.975975314084195,3535.59,203.76,12.44,12.0,0.0,DM,Eredivisie
+2505,Robin van Cruijsen,20260118,FC Volendam vs FC Utrecht,FC Volendam,35.56402955210097,4621.19,341.40000000000003,57.43,17.0,4.0,AM,Eredivisie
+2508,Nordin Bukala,20260118,FC Volendam vs FC Utrecht,FC Volendam,96.1007079786811,12080.82,788.13,176.34,21.0,9.0,CM,Eredivisie
+442,Brandley Kuwas,20260118,FC Volendam vs FC Utrecht,FC Volendam,96.09841070306186,10702.48,880.98,266.68,27.0,13.0,RW,Eredivisie
+168,Joël Drommel,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,94.67804955527319,5960.93,82.44,61.75,0.0,1.0,GK,Eredivisie
+1706,Tobias Lauritsen,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,94.68552664814347,11245.8,591.61,45.07,32.0,1.0,CF,Eredivisie
+1710,Joshua Kitolano,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,94.68814413880033,12770.59,1390.1100000000001,326.6,50.0,14.0,CM,Eredivisie
+1726,Julian Baas,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,94.68220749236612,12712.98,689.5400000000001,141.85,28.0,5.0,DM,Eredivisie
+197,Mitchell van Bergen,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,68.5946743483454,9763.08,1114.31,472.48,22.0,21.0,LW,Eredivisie
+2113,Shunsuke Mito,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,80.08437265214124,10659.23,1131.75,428.58,32.0,20.0,LW,Eredivisie
+2289,Teo Quintero,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,94.68243360527686,10909.31,818.57,251.09,22.0,12.0,CB,Eredivisie
+2290,Mike Kleijn,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,14.599650604163635,2005.7,301.62,69.41,8.0,3.0,LB,Eredivisie
+2291,Marvin Young,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,94.68690812427313,11398.41,483.99,74.38,21.0,4.0,CB,Eredivisie
+2512,Ayoni Santos,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,79.69558566433567,10940.61,760.0300000000001,71.46,38.0,3.0,CM,Eredivisie
+2591,Lushendry Martes,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,88.9878648737291,10852.96,1036.76,223.57,38.0,11.0,LB,Eredivisie
+344,Saïd Bakari,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,5.695128172426987,893.11,118.04,11.45,3.0,1.0,RB,Eredivisie
+52,Pelle Clement,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,26.09060323918316,3334.64,303.99,63.91,8.0,3.0,CM,Eredivisie
+743,Bruno Martins Indi,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,94.68846477687342,10121.25,296.78999999999996,56.47,10.0,4.0,CB,Eredivisie
+951,Shurandy Sambo,20260118,Feyenoord vs Sparta Rotterdam,Sparta Rotterdam,14.987056148329541,1713.62,153.48,61.68,1.0,3.0,RB,Eredivisie
+1426,Quinten Timber,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,23.156502509143493,2722.51,350.72999999999996,26.71,14.0,2.0,CM,Eredivisie
+1624,Luciano Valente,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,94.68251445086705,13104.06,974.33,179.25,41.0,9.0,AM,Eredivisie
+2022,Leo Sauer,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,94.68194646369622,11071.16,901.54,261.99,28.0,11.0,LW,Eredivisie
+2137,Anis Hadj Moussa,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,94.68312528895052,10239.98,995.76,283.33,42.0,12.0,RW,Eredivisie
+2347,Jordan Lotomba,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,81.9811215548829,10291.91,923.4100000000001,143.55,41.0,6.0,RB,Eredivisie
+2357,In-Beom Hwang,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,71.52931843267108,10368.89,827.52,87.68,44.0,7.0,CM,Eredivisie
+2419,Tobias van den Elshout,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,12.704901168344477,1729.01,269.04,126.21,8.0,3.0,,Eredivisie
+2488,Anel Ahmedhodzic,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,94.68233006562423,11686.64,845.19,148.94,34.0,7.0,CB,Eredivisie
+2489,Tsuyoshi Watanabe,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,94.68473025048169,11793.93,805.0799999999999,127.07,27.0,8.0,CB,Eredivisie
+2492,Jordan Bos,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,94.6876646520998,12220.39,1280.49,329.86,45.0,12.0,LB,Eredivisie
+2493,Casper Tengstedt,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,62.28295014796267,8208.27,737.42,139.27,31.0,4.0,CF,Eredivisie
+2570,Cyle Larin,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,23.292493684590397,2581.74,260.43,95.87,7.0,3.0,CF,Eredivisie
+2593,Shaqueel van Persie,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,32.40089575832089,3689.49,228.24,15.86,13.0,0.0,CF,Eredivisie
+28,Timon Wellenreuther,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,94.67737726308921,5804.67,38.03,1.4,3.0,0.0,GK,Eredivisie
+412,Sem Steijn,20260118,Feyenoord vs Sparta Rotterdam,Feyenoord,71.3953702392751,10085.31,874.7,116.97,41.0,6.0,AM,Eredivisie
+1504,Ricky van Wolfswinkel,20260118,Heracles Almelo vs FC Twente,FC Twente,110.04531559072109,12239.24,1017.11,232.42,40.0,11.0,CF,Eredivisie
+1513,Bart van Rooij,20260118,Heracles Almelo vs FC Twente,FC Twente,110.04960220017679,11204.15,1444.65,588.91,36.0,19.0,RB,Eredivisie
+1655,Arno Verschueren,20260118,Heracles Almelo vs FC Twente,FC Twente,31.88830689782368,4322.46,536.62,150.36,16.0,5.0,AM,Eredivisie
+1913,Mats Rots,20260118,Heracles Almelo vs FC Twente,FC Twente,110.0541862089612,11028.53,1164.77,329.61,36.0,19.0,LB,Eredivisie
+1919,Kristian Hlynsson,20260118,Heracles Almelo vs FC Twente,FC Twente,78.1597776383036,8717.16,695.85,98.21,27.0,6.0,AM,Eredivisie
+218,Lars Unnerstall,20260118,Heracles Almelo vs FC Twente,FC Twente,110.04829325058185,5674.09,5.56,0.0,1.0,0.0,GK,Eredivisie
+2517,Stav Lemkin,20260118,Heracles Almelo vs FC Twente,FC Twente,110.04464014576372,10871.31,532.1700000000001,186.37,15.0,8.0,CB,Eredivisie
+2552,Sondre Ørjasæter,20260118,Heracles Almelo vs FC Twente,FC Twente,77.53228834240662,8260.29,857.5,181.55,25.0,9.0,LW,Eredivisie
+2566,Marko Pjaca,20260118,Heracles Almelo vs FC Twente,FC Twente,61.64874551971326,7052.0,525.63,113.06,16.0,6.0,LW,Eredivisie
+341,Robin Pröpper,20260118,Heracles Almelo vs FC Twente,FC Twente,110.05347817004387,10536.52,527.89,95.55,25.0,5.0,CB,Eredivisie
+660,Ramiz Zerrouki,20260118,Heracles Almelo vs FC Twente,FC Twente,70.33790204678363,7697.78,629.65,74.9,27.0,3.0,DM,Eredivisie
+720,Thomas van den Belt,20260118,Heracles Almelo vs FC Twente,FC Twente,102.84359214218895,10993.98,608.96,145.18,21.0,6.0,CM,Eredivisie
+780,Mathias Kjølø,20260118,Heracles Almelo vs FC Twente,FC Twente,32.51846038863976,4350.97,351.74,53.23,15.0,2.0,DM,Eredivisie
+801,Max Bruns,20260118,Heracles Almelo vs FC Twente,FC Twente,7.2018739352640555,760.95,7.38,0.0,1.0,0.0,CB,Eredivisie
+803,Daan Rots,20260118,Heracles Almelo vs FC Twente,FC Twente,48.405444421530206,4694.36,308.24,59.03,13.0,3.0,RW,Eredivisie
+1578,Mimeirhel Benita,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,110.04491370993675,10266.09,717.95,78.23,30.0,5.0,RB,Eredivisie
+1668,Timo Jansink,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,110.04854157596866,5055.63,10.23,0.0,1.0,0.0,GK,Eredivisie
+1695,Tristan van Gilst,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,28.03079613717588,3686.33,319.58000000000004,76.15,13.0,2.0,LW,Eredivisie
+1767,Damon Mirani,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,82.02121909718747,8194.74,502.82,109.32,20.0,3.0,CB,Eredivisie
+1772,Lequincio Zeefuik,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,110.0533015938729,10633.35,811.91,215.77,37.0,7.0,CF,Eredivisie
+1776,Walid Ould-Chikh,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,72.32996352266805,6940.06,576.48,62.07,23.0,2.0,AM,Eredivisie
+1998,Bryan Limbombe,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,11.696489323199419,1615.87,101.39,0.0,7.0,0.0,RW,Eredivisie
+2044,Alec Van Hoorenbeeck,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,110.05201512496541,11932.94,914.45,263.71,31.0,11.0,CB,Eredivisie
+2294,Ivan Mesík,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,110.04656768222138,11414.03,1195.55,262.3,37.0,12.0,CB,Eredivisie
+2340,Luka Kulenovic,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,110.05600622291367,9903.94,590.56,185.89,23.0,5.0,CF,Eredivisie
+2362,Jan Zamburek,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,72.1908590404614,8260.8,612.24,72.36,29.0,3.0,CM,Eredivisie
+2614,Erik Ahlstrand,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,98.35043051569299,10622.83,1239.61,345.8,33.0,18.0,CM,Eredivisie
+296,Ajdin Hrustic,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,110.0519212746017,11742.54,866.99,144.96,36.0,7.0,AM,Eredivisie
+746,Mario Engels,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,37.72128475551295,3934.33,316.73,67.42,11.0,4.0,LW,Eredivisie
+85,Thomas Bruns,20260118,Heracles Almelo vs FC Twente,Heracles Almelo,37.860128215802185,4547.38,249.20999999999998,41.55,9.0,1.0,AM,Eredivisie
+1614,Thijmen Blokzijl,20260118,sc Heerenveen vs FC Groningen,FC Groningen,100.17302026604766,11220.38,569.33,123.83,22.0,7.0,CB,Eredivisie
+1846,Thom van Bergen,20260118,sc Heerenveen vs FC Groningen,FC Groningen,100.17481311098332,12194.28,1460.28,438.18,47.0,15.0,CF,Eredivisie
+1856,Jorg Schreuders,20260118,sc Heerenveen vs FC Groningen,FC Groningen,100.17579322342804,12092.22,1291.3,342.9,39.0,18.0,CM,Eredivisie
+1926,Tygo Land,20260118,sc Heerenveen vs FC Groningen,FC Groningen,83.76411021273255,10670.71,504.52,46.93,25.0,2.0,CM,Eredivisie
+1966,Stije Resink,20260118,sc Heerenveen vs FC Groningen,FC Groningen,100.17264970405103,13031.46,1134.08,213.77,38.0,9.0,CM,Eredivisie
+2039,Younes Taha,20260118,sc Heerenveen vs FC Groningen,FC Groningen,83.63590070019096,10511.36,1341.06,318.24,48.0,17.0,AM,Eredivisie
+2240,Marvin Peersman,20260118,sc Heerenveen vs FC Groningen,FC Groningen,93.546595763229,10730.73,908.0300000000001,213.33,37.0,11.0,CB,Eredivisie
+2241,Tika de Jonge,20260118,sc Heerenveen vs FC Groningen,FC Groningen,16.41129207383279,2267.22,180.91,34.27,6.0,2.0,AM,Eredivisie
+2245,Brynjólfur Willumsson,20260118,sc Heerenveen vs FC Groningen,FC Groningen,16.536844253929374,2430.42,184.35000000000002,26.92,10.0,2.0,CF,Eredivisie
+2247,Hidde Jurjus,20260118,sc Heerenveen vs FC Groningen,FC Groningen,62.248910411622276,3856.32,7.52,0.0,1.0,0.0,GK,Eredivisie
+2307,Dies Janse,20260118,sc Heerenveen vs FC Groningen,FC Groningen,100.16925549009105,11220.96,598.37,86.85,24.0,6.0,CB,Eredivisie
+2317,Wouter Prins,20260118,sc Heerenveen vs FC Groningen,FC Groningen,6.6264468607506135,944.6,104.78,8.29,4.0,0.0,LB,Eredivisie
+233,Etienne Vaessen,20260118,sc Heerenveen vs FC Groningen,FC Groningen,37.926119747575804,2464.06,46.55,9.48,2.0,1.0,GK,Eredivisie
+2377,David van der Werff,20260118,sc Heerenveen vs FC Groningen,FC Groningen,100.17289719626167,12433.46,1158.19,231.45,42.0,10.0,GK,Eredivisie
+2531,Tyrique Mercera,20260118,sc Heerenveen vs FC Groningen,FC Groningen,16.756860999851654,2259.16,185.74,26.97,6.0,2.0,RB,Eredivisie
+724,Marco Rente,20260118,sc Heerenveen vs FC Groningen,FC Groningen,83.41693755346449,9751.44,574.02,172.85,19.0,10.0,CB,Eredivisie
+1466,Luuk Brouwers,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,78.78599058190379,9369.23,835.71,77.63,40.0,6.0,CM,Eredivisie
+1602,Ringo Meerveld,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,100.17416050085373,12320.42,1192.07,302.34,45.0,13.0,AM,Eredivisie
+1636,Amourricho van Axel Dongen,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,14.0687306501548,1817.68,113.06,13.12,6.0,1.0,LW,Eredivisie
+1893,Bernt Klaverboer,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,100.16453697056711,6976.46,13.09,0.0,1.0,0.0,GK,Eredivisie
+1985,Oliver Braude,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,86.01318773624529,10239.87,981.25,210.8,33.0,11.0,RB,Eredivisie
+2199,Maas Willemsen,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,100.17208413001912,11525.8,808.9200000000001,135.97,31.0,7.0,CB,Eredivisie
+2274,Vasilios Zagaritis,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,86.10441256582531,9483.54,1077.31,348.62,26.0,15.0,LB,Eredivisie
+2313,Jacob Trenskow,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,100.17326090481596,12355.37,854.85,96.23,40.0,6.0,RW,Eredivisie
+2352,Nikolai Hopland,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,78.79796829844996,8997.94,571.5,121.71,28.0,4.0,CB,Eredivisie
+2393,Marcus Linday,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,100.17146872803936,12828.96,942.41,134.99,37.0,10.0,DM,Eredivisie
+2498,Maxence Rivera,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,21.38766915216791,3097.79,385.45000000000005,62.1,13.0,4.0,RW,Eredivisie
+2610,Lasse Nordås,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,14.163663220088626,1917.76,175.68,52.16,5.0,2.0,CF,Eredivisie
+361,Dylan Vente,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,100.17207736142291,11601.93,942.74,259.8,34.0,14.0,CF,Eredivisie
+50,Sam Kersten,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,21.371616002956667,2313.05,147.51,61.34,3.0,3.0,CB,Eredivisie
+90,Joris van Overeem,20260118,sc Heerenveen vs FC Groningen,sc Heerenveen,100.17194341529134,11896.42,712.23,54.85,41.0,3.0,CM,Eredivisie
+1521,Ilias Bronkhorst,20260121,AZ vs Excelsior,Excelsior,79.59968786578229,10200.7,770.2199999999999,183.79,27.0,9.0,CB,Eredivisie
+1577,Arthur Zagré,20260121,AZ vs Excelsior,Excelsior,97.07747514051016,11227.01,886.8,284.08,27.0,11.0,LB,Eredivisie
+1611,Rick Meissen,20260121,AZ vs Excelsior,Excelsior,97.07566137566137,11008.38,505.49,125.55,17.0,7.0,CB,Eredivisie
+1626,Gyan de Regt,20260121,AZ vs Excelsior,Excelsior,31.697344091443938,3771.35,424.29999999999995,124.77,12.0,5.0,LW,Eredivisie
+1691,Miliano Jonathans,20260121,AZ vs Excelsior,Excelsior,17.79314203500919,2226.1,206.05,80.34,6.0,3.0,RW,Eredivisie
+1722,Stijn van Gassel,20260121,AZ vs Excelsior,Excelsior,97.06716672349131,5693.96,20.82,3.43,1.0,0.0,GK,Eredivisie
+1783,Noah Naujoks,20260121,AZ vs Excelsior,Excelsior,97.07242260721387,13671.68,1198.98,271.5,46.0,18.0,AM,Eredivisie
+1801,Derensili Sanches Fernandes,20260121,AZ vs Excelsior,Excelsior,79.28345944186803,9744.73,1031.8799999999999,155.2,30.0,12.0,RW,Eredivisie
+1885,Irakli Yegoian,20260121,AZ vs Excelsior,Excelsior,97.07542705021076,13127.51,1251.5900000000001,238.51,51.0,11.0,CM,Eredivisie
+1912,Lewis Schouten,20260121,AZ vs Excelsior,Excelsior,85.60306063243401,11802.95,488.8,32.98,27.0,2.0,CM,Eredivisie
+2017,Casper Widell,20260121,AZ vs Excelsior,Excelsior,97.07646270656542,10867.71,414.68,93.44,19.0,5.0,CB,Eredivisie
+240,Emil Hansson,20260121,AZ vs Excelsior,Excelsior,65.37519623233909,9578.12,983.31,121.0,38.0,7.0,LW,Eredivisie
+2480,Adam Carlén,20260121,AZ vs Excelsior,Excelsior,11.468682505399567,1380.6,117.72,11.51,4.0,1.0,DM,Eredivisie
+2483,Nolan Martens,20260121,AZ vs Excelsior,Excelsior,17.475475220638153,2059.31,134.39,31.67,5.0,2.0,RB,Eredivisie
+2487,Jerolldino Bergraaf,20260121,AZ vs Excelsior,Excelsior,79.29056168670729,9627.46,942.97,133.7,44.0,6.0,CF,Eredivisie
+43,Mike van Duinen,20260121,AZ vs Excelsior,Excelsior,17.781691310848977,2140.56,213.86,42.25,6.0,3.0,CF,Eredivisie
+1548,Mees de Wit,20260121,AZ vs Excelsior,AZ,85.21601979279419,11021.84,611.1700000000001,119.32,23.0,6.0,LB,Eredivisie
+1889,Wouter Goes,20260121,AZ vs Excelsior,AZ,97.07004447268106,12223.06,580.0799999999999,71.75,31.0,4.0,CB,Eredivisie
+2023,Alexandre Manuel Penetra Correia,20260121,AZ vs Excelsior,AZ,97.07307195174494,11265.33,446.82,86.19,19.0,4.0,CB,Eredivisie
+2048,Troy Parrott,20260121,AZ vs Excelsior,AZ,97.07226976192494,11457.44,1282.67,227.98,49.0,13.0,CF,Eredivisie
+2084,Ibrahim Sadiq,20260121,AZ vs Excelsior,AZ,50.07354872603099,5718.9,732.4,275.4,20.0,12.0,RW,Eredivisie
+2149,Kees Smit,20260121,AZ vs Excelsior,AZ,97.07402713582825,13021.51,1337.74,265.77,53.0,15.0,CM,Eredivisie
+2282,Seiya Maikuma,20260121,AZ vs Excelsior,AZ,11.795171090502079,1475.34,232.90999999999997,73.02,6.0,2.0,RB,Eredivisie
+2368,Ro-Zangelo Daal,20260121,AZ vs Excelsior,AZ,32.92547235829252,3764.04,385.18,77.04,16.0,4.0,LW,Eredivisie
+2369,Elijah Dijkstra,20260121,AZ vs Excelsior,AZ,85.27903882279273,10895.25,860.86,221.23,29.0,8.0,RB,Eredivisie
+2432,Kasper Boogaard,20260121,AZ vs Excelsior,AZ,77.66436275254443,10225.29,465.34000000000003,51.24,25.0,3.0,AM,Eredivisie
+2521,Mateo Chávez,20260121,AZ vs Excelsior,AZ,19.411734606856555,2276.22,330.82,114.85,6.0,6.0,LB,Eredivisie
+2523,Isak Jensen,20260121,AZ vs Excelsior,AZ,64.14883756268044,8443.27,568.71,108.96,24.0,6.0,LW,Eredivisie
+2556,Weslley Pinto Batista,20260121,AZ vs Excelsior,AZ,47.00049585606008,6635.06,653.0400000000001,123.97,26.0,8.0,RW,Eredivisie
+500,Jizz Hornkamp,20260121,AZ vs Excelsior,AZ,11.856209150326796,1396.78,230.25,79.36,5.0,3.0,CF,Eredivisie
+943,Peer Koopmeiners,20260121,AZ vs Excelsior,AZ,97.07163435334422,12466.91,725.1800000000001,141.36,26.0,6.0,DM,Eredivisie
+97,Jeroen Zoet,20260121,AZ vs Excelsior,AZ,97.07103238504205,5425.3,19.76,0.0,1.0,0.0,GK,Eredivisie
+10,Danny Verbeek,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,65.74445041174364,7344.97,417.66,68.0,21.0,3.0,AM,KKD
+1244,Ilias Boumassaoudi,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,29.28411764705882,3982.64,516.1,96.94,19.0,3.0,AM,KKD
+1295,Mees Laros,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,84.52508828118584,10292.62,1278.06,290.36,42.0,15.0,CM,KKD
+2014,Zaid El Bakkali,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,10.501332521129978,1379.14,107.72999999999999,35.01,1.0,2.0,CM,KKD
+2071,Jeffry Fortes,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,95.0277631347742,10816.06,739.59,170.37,29.0,7.0,RB,KKD
+2072,Nick de Groot,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,95.02904761904762,11973.66,1636.0900000000001,449.69,56.0,15.0,LB,KKD
+2073,Kévin Monzialo,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,95.02755681818182,10034.91,963.5899999999999,379.16,22.0,16.0,CF,KKD
+2074,Kevin Felida,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,95.02880090864838,11713.25,875.1,258.47,21.0,12.0,DM,KKD
+2316,Genrich Sillé,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,46.00099326002129,6483.84,979.1700000000001,273.1,26.0,8.0,LW,KKD
+2359,Sheddy Ezzeldin Daldom Hamad Barglan,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,49.02602886977886,6385.15,784.38,227.33,22.0,9.0,RB,KKD
+2384,Sebastian Karlsson Grach,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,29.436702311141776,3413.48,285.8,105.96,4.0,4.0,CF,KKD
+2399,Jack De Vries,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,49.02713777640328,6341.17,865.8499999999999,262.96,21.0,12.0,,KKD
+343,Stan Maas,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,95.0310734463277,10765.12,688.12,217.84,24.0,9.0,CB,KKD
+463,Reda Akmum,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,46.0019451962111,5439.27,534.87,149.66,22.0,5.0,CB,KKD
+512,Pepijn van de Merbel,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,95.02984811020842,5380.59,47.15,9.01,1.0,0.0,GK,KKD
+551,Thijs van Leeuwen,20260123,FC Dordrecht vs FC Den Bosch,FC Den Bosch,65.59218992678055,8868.72,797.5999999999999,195.42,17.0,11.0,CM,KKD
+1727,Celton Anssumane Biai,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,95.02696550516546,5426.99,51.29,18.11,0.0,1.0,GK,KKD
+1799,Sem Valk,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,95.02884291960981,11300.83,986.9100000000001,318.83,24.0,11.0,CB,KKD
+1843,Lorenzo Codutti,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,30.354318811382527,3616.11,397.02,141.11,12.0,4.0,CB,KKD
+2050,Martin Vetkal,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,29.649730049552545,4008.94,693.51,177.1,16.0,9.0,DM,KKD
+2051,Robin van Asten,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,4.398367733159856,743.72,128.63,23.68,5.0,1.0,CM,KKD
+2052,Yannick Eduardo,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,95.0292863002461,11584.07,1557.49,670.36,32.0,23.0,CF,KKD
+2053,Seung-Gyun Bae,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,65.38104448742747,8788.52,836.77,208.25,31.0,8.0,CM,KKD
+2055,Yannis M'Bemba,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,95.03218210361068,10896.39,700.35,140.75,27.0,7.0,CB,KKD
+2056,Nicolás Rossi,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,17.8253054789121,2261.14,212.85000000000002,79.04,3.0,4.0,LW,KKD
+2212,Stephano Carrillo,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,29.9601908065915,3454.41,368.41,92.67,16.0,2.0,CF,KKD
+2244,John Hilton,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,64.67798809342085,8474.11,1067.66,296.42,31.0,12.0,LB,KKD
+2298,Lawson Sunderland,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,95.0259916887042,12576.69,1144.8400000000001,162.5,41.0,10.0,CM,KKD
+2410,Argyris Darelas,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,90.62830446672744,11930.31,1176.04,356.43,33.0,13.0,,KKD
+2411,Björn Hardley,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,95.02642192773068,11544.76,853.6999999999999,156.02,33.0,2.0,,KKD
+2412,Do-Young Yoon,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,77.20544769631992,10657.44,1482.07,406.78,40.0,17.0,RW,KKD
+555,Joey de Bie,20260123,FC Dordrecht vs FC Den Bosch,FC Dordrecht,65.06895226381735,8464.82,1194.8200000000002,478.11,21.0,15.0,GK,KKD
+1244,Ilias Boumassaoudi,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,17.050546560368208,2074.54,192.04,52.19,4.0,4.0,AM,KKD
+1295,Mees Laros,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,97.22861113523844,11193.93,960.94,233.19,30.0,8.0,CM,KKD
+2014,Zaid El Bakkali,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,45.466020257986315,5251.78,438.66,37.99,19.0,2.0,CM,KKD
+2072,Nick de Groot,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,97.2312346688471,11891.38,1137.1999999999998,348.53,33.0,12.0,LB,KKD
+2073,Kévin Monzialo,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,97.23383179350415,10208.58,1114.72,413.16,23.0,14.0,CF,KKD
+2074,Kevin Felida,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,97.23576338793177,11457.29,654.97,130.21,21.0,7.0,DM,KKD
+2077,Amine Boushaba,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,16.969737427681356,2287.86,279.99,28.65,13.0,2.0,,KKD
+2078,Emian-Johar Semedo,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,66.94485022568732,8157.23,888.71,217.09,22.0,8.0,RW,KKD
+2316,Genrich Sillé,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,30.288529727055334,3673.09,433.49,134.95,14.0,5.0,LW,KKD
+2359,Sheddy Ezzeldin Daldom Hamad Barglan,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,80.25833769862058,9192.79,759.98,243.26,18.0,11.0,RB,KKD
+2384,Sebastian Karlsson Grach,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,30.34418276439975,3440.12,265.82,97.96,6.0,4.0,CF,KKD
+2399,Jack De Vries,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,66.88628984651712,9064.43,1330.03,535.73,21.0,16.0,,KKD
+343,Stan Maas,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,51.76615358592693,6120.83,428.5,53.06,20.0,2.0,CB,KKD
+463,Reda Akmum,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,97.23261327713384,11072.85,856.3299999999999,162.42,36.0,10.0,CB,KKD
+512,Pepijn van de Merbel,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,97.22935153583619,5697.64,86.06,9.44,1.0,0.0,GK,KKD
+551,Thijs van Leeuwen,20260126,De Graafschap vs FC Den Bosch,FC Den Bosch,80.18287037037038,10738.09,1109.26,235.93,41.0,7.0,CM,KKD
+1076,Ties Wieggers,20260126,De Graafschap vs FC Den Bosch,De Graafschap,97.23136136849607,6820.78,109.0,26.41,6.0,1.0,GK,KKD
+1171,Stijn Bultman,20260126,De Graafschap vs FC Den Bosch,De Graafschap,97.22741964446041,10829.19,828.02,286.57,21.0,9.0,CB,KKD
+1207,Teun Gijselhart,20260126,De Graafschap vs FC Den Bosch,De Graafschap,97.23527513312894,12051.34,1069.42,335.78,27.0,12.0,CM,KKD
+1439,Jevon Simons,20260126,De Graafschap vs FC Den Bosch,De Graafschap,84.25730900979845,10576.82,1227.74,311.64,36.0,14.0,RW,KKD
+1599,Denzel Eijken,20260126,De Graafschap vs FC Den Bosch,De Graafschap,7.101430863867344,1062.09,133.31,42.17,4.0,2.0,RW,KKD
+1978,Reuven Niemeijer,20260126,De Graafschap vs FC Den Bosch,De Graafschap,97.23274931495475,11709.74,1157.22,188.58,40.0,8.0,AM,KKD
+2081,Thomas Kok,20260126,De Graafschap vs FC Den Bosch,De Graafschap,97.2347284060552,10919.46,975.76,341.45,24.0,13.0,CB,KKD
+2082,Othniël Raterink,20260126,De Graafschap vs FC Den Bosch,De Graafschap,97.23535743115976,10840.77,1189.03,371.58,27.0,18.0,RB,KKD
+2083,Milan Smits,20260126,De Graafschap vs FC Den Bosch,De Graafschap,22.174659985683608,2788.02,320.65000000000003,48.23,16.0,2.0,CM,KKD
+2241,Jason Meerstadt,20260126,De Graafschap vs FC Den Bosch,De Graafschap,97.22909275215407,11509.98,946.92,311.63,23.0,12.0,CM,KKD
+2246,Chahid El Allachi,20260126,De Graafschap vs FC Den Bosch,De Graafschap,75.05808378527077,9549.64,1025.21,305.24,26.0,14.0,LW,KKD
+2347,Silvan Broker,20260126,De Graafschap vs FC Den Bosch,De Graafschap,12.974579124579126,1541.38,132.17000000000002,22.19,5.0,0.0,CF,KKD
+334,Fedde de Jong,20260126,De Graafschap vs FC Den Bosch,De Graafschap,90.13189430019972,11733.37,1456.36,410.58,41.0,14.0,CM,KKD
+586,Levi Schoppema,20260126,De Graafschap vs FC Den Bosch,De Graafschap,97.2277815468114,11465.1,1156.29,426.49,27.0,12.0,LB,KKD
