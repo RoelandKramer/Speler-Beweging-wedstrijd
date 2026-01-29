@@ -191,38 +191,45 @@ def build_player_match_overview(
     styler = display_df.style.hide(axis="index")
 
     table_styles = [
-    {
-        "selector": "table",
-        "props": [
-            ("border-collapse", "collapse"),
-            ("width", "100%"),
-            ("font-family", STREAMLIT_FONT_STACK),
-        ],
-    },
-    {
-        "selector": "th",
-        "props": [
-            ("font-family", STREAMLIT_FONT_STACK),
-            ("font-weight", "700"),
-            ("font-size", "12px"),
-            ("text-align", "left"),
-            ("padding", "8px 10px"),
-            ("border-bottom", "2px solid #ddd"),
-        ],
-    },
-    {
-        "selector": "td",
-        "props": [
-            ("font-family", STREAMLIT_FONT_STACK),
-            ("font-size", "12px"),
-            ("padding", "7px 10px"),
-            ("border-bottom", "1px solid #eee"),
-            ("vertical-align", "middle"),
-        ],
-    },
-    {"selector": "caption", "props": [("caption-side", "top"), ("font-weight", "700")]},
+        {
+            "selector": "table",
+            "props": [
+                ("border-collapse", "collapse"),
+                ("width", "100%"),
+                ("font-family", STREAMLIT_FONT_STACK),
+            ],
+        },
+        {
+            "selector": "th",
+            "props": [
+                ("font-family", STREAMLIT_FONT_STACK),
+                ("font-weight", "700"),
+                ("font-size", "14px"),
+                ("text-align", "left"),
+                ("padding", "10px 12px"),
+                ("border-bottom", "2px solid #ddd"),
+            ],
+        },
+        {
+            "selector": "td",
+            "props": [
+                ("font-family", STREAMLIT_FONT_STACK),
+                ("font-size", "14px"),
+                ("padding", "9px 12px"),
+                ("border-bottom", "1px solid #eee"),
+                ("vertical-align", "middle"),
+            ],
+        },
+        {
+            "selector": "caption",
+            "props": [
+                ("caption-side", "top"),
+                ("font-weight", "700"),
+                ("font-size", "14px"),
+                ("padding", "0 0 10px 0"),
+            ],
+        },
     ]
-
     
     styler = styler.set_table_styles(table_styles)
 
