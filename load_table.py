@@ -1,9 +1,13 @@
+# =========================
 # file: load_table.py
+# =========================
 
 from dataclasses import dataclass
+from io import BytesIO
 from typing import Optional, Tuple
 
 import pandas as pd
+from PIL import Image, ImageDraw, ImageFont
 
 
 @dataclass(frozen=True)
@@ -205,7 +209,6 @@ def build_player_match_overview(
     else:
         combined_src = p1.copy()
 
-    # sort: date desc, then match_id desc, then player_rank asc (player1 first)
     combined_src["_sort_date"] = combined_src["_match_date"].fillna(pd.Timestamp.min)
     combined_src = combined_src.sort_values(
         by=["_sort_date", "_match_id_num", "match_id", "_player_rank"],
@@ -213,7 +216,6 @@ def build_player_match_overview(
         kind="mergesort",
     ).reset_index(drop=True)
 
-    # build display table
     display_df = pd.DataFrame(
         {
             "_row_type": combined_src["_row_type"],
@@ -228,7 +230,6 @@ def build_player_match_overview(
         }
     )
 
-    # styler
     styler = display_df.style.hide(axis="index").hide(axis="columns", subset=["_row_type"])
 
     table_styles = [
@@ -310,7 +311,7 @@ def build_player_match_overview(
         caption = "{} vs {} — {} (all matches)".format(team_player_name, compare_player_name, team_name)
     styler = styler.set_caption(caption)
 
-    return display_df.drop(columns=["_row_type"]), styler
+    return display_df, styler
 
 
 def styler_to_html(styler: "pd.io.formats.style.Styler") -> str:
@@ -335,3 +336,352 @@ def estimate_table_height_px(n_rows: int) -> int:
     row_height = 42
     padding = 28
     return header + caption + (n_rows * row_height) + padding
+
+
+def _hex_to_rgb(hex_color: str) -> tuple:
+    c = hex_color.lstrip("#")
+    return int(c[0:2], 16), int(c[2:4], 16), int(c[4:6], 16)
+
+
+def _load_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
+    """
+    Best-effort: use DejaVu fonts if available, otherwise fallback to PIL default.
+    """
+    try:
+        if bold:
+            return ImageFont.truetype("DejaVuSans-Bold.ttf", size=size)
+        return ImageFont.truetype("DejaVuSans.ttf", size=size)
+    except Exception:
+        return ImageFont.load_default()
+
+
+# file: load_table.py
+# add/keep these imports near the top:
+from io import BytesIO
+from PIL import Image, ImageDraw, ImageFont
+
+# add these helpers anywhere above table_to_png_bytes:
+
+def _a4_landscape_px(dpi: int) -> tuple:
+    # A4: 11.69 x 8.27 inches (landscape)
+    w = int(round(11.69 * dpi))
+    h = int(round(8.27 * dpi))
+    return w, h
+
+
+def _clamp(v: float, lo: float, hi: float) -> float:
+    return max(lo, min(hi, v))
+
+
+def table_to_png_bytes(
+    display_df: pd.DataFrame,
+    *,
+    title: str,
+    caption: str,
+    dpi: int = 200,
+) -> bytes:
+    """
+    Render table to A4 landscape PNG (auto-scaled), including title + caption.
+    Expects display_df to include `_row_type` + display columns.
+    """
+    cols = OverviewColumns()
+
+    df = display_df.copy()
+    if "_row_type" not in df.columns:
+        df["_row_type"] = "primary"
+
+    show_cols = [
+        cols.match,
+        cols.player,
+        cols.pos,
+        cols.minutes,
+        cols.total_distance,
+        cols.m_per_min,
+        cols.runs,
+        cols.sprints,
+    ]
+
+    # Base layout (will be scaled to fit A4)
+    base_pad_x = 14
+    base_row_h = 52
+    base_header_h = 56
+    base_bar_w = 220
+    base_bar_h = 28
+
+    # Column widths (professional fixed layout)
+    base_col_widths = {
+        cols.match: 260,
+        cols.player: 180,
+        cols.pos: 70,
+        cols.minutes: 70,
+        cols.total_distance: 320,
+        cols.m_per_min: 260,
+        cols.runs: 220,
+        cols.sprints: 220,
+    }
+
+    base_table_w = sum(base_col_widths[c] for c in show_cols)
+    base_table_h = base_header_h + (len(df) * base_row_h)
+
+    # A4 canvas
+    page_w, page_h = _a4_landscape_px(dpi=dpi)
+    margin = int(round(0.35 * dpi))  # ~0.35 inch margin
+
+    # Title/caption block (base, before scaling)
+    base_title_h = 56
+    base_caption_h = 34
+    base_top_block_h = base_title_h + base_caption_h + 12
+
+    avail_w = page_w - (2 * margin)
+    avail_h = page_h - (2 * margin) - base_top_block_h
+
+    # Scale to fit page (allow a bit of upscale but not too much)
+    scale_w = avail_w / float(base_table_w)
+    scale_h = avail_h / float(base_table_h)
+    scale = _clamp(min(scale_w, scale_h), 0.45, 1.35)
+
+    # Scaled metrics
+    pad_x = int(round(base_pad_x * scale))
+    row_h = int(round(base_row_h * scale))
+    header_h = int(round(base_header_h * scale))
+    bar_w = int(round(base_bar_w * scale))
+    bar_h = int(round(base_bar_h * scale))
+    title_h = int(round(base_title_h * scale))
+    caption_h = int(round(base_caption_h * scale))
+
+    col_widths = {k: int(round(v * scale)) for k, v in base_col_widths.items()}
+
+    table_w = sum(col_widths[c] for c in show_cols)
+    table_h = header_h + (len(df) * row_h)
+
+    # Final image
+    img = Image.new("RGB", (page_w, page_h), _hex_to_rgb("#FFFFFF"))
+    draw = ImageDraw.Draw(img)
+
+    # Fonts (best effort)
+    title_font = _load_font(max(18, int(round(34 * scale))), bold=True)
+    caption_font = _load_font(max(14, int(round(18 * scale))), bold=False)
+    header_font = _load_font(max(14, int(round(18 * scale))), bold=True)
+    cell_font = _load_font(max(12, int(round(16 * scale))), bold=False)
+
+    # ---- Title + caption (centered) ----
+    y = margin
+    title_w = draw.textlength(title, font=title_font)
+    draw.text(((page_w - title_w) / 2.0, y), title, font=title_font, fill=_hex_to_rgb("#111827"))
+
+    y += title_h
+    cap_w = draw.textlength(caption, font=caption_font)
+    draw.text(((page_w - cap_w) / 2.0, y), caption, font=caption_font, fill=_hex_to_rgb("#374151"))
+
+    y += caption_h + int(round(14 * scale))
+
+    # ---- Table origin (centered horizontally) ----
+    table_x0 = margin + max(0, (avail_w - table_w) // 2)
+    table_y0 = y
+
+    # Header background + bottom border
+    draw.rectangle([table_x0, table_y0, table_x0 + table_w, table_y0 + header_h], fill=_hex_to_rgb("#FFFFFF"))
+    draw.line(
+        [table_x0, table_y0 + header_h, table_x0 + table_w, table_y0 + header_h],
+        fill=_hex_to_rgb("#DDDDDD"),
+        width=max(2, int(round(3 * scale))),
+    )
+
+    # Header labels
+    x = table_x0
+    for c in show_cols:
+        draw.text(
+            (x + pad_x, table_y0 + int(round((header_h - 18 * scale) / 2))),
+            c,
+            font=header_font,
+            fill=_hex_to_rgb("#111827"),
+        )
+        x += col_widths[c]
+
+    # Rows
+    for i, row in df.iterrows():
+        y0 = table_y0 + header_h + i * row_h
+        y1 = y0 + row_h
+
+        bg = ROW_BG_PLAYER_2 if row.get("_row_type") == "compare" else ROW_BG_PLAYER_1
+        draw.rectangle([table_x0, y0, table_x0 + table_w, y1], fill=_hex_to_rgb(bg))
+        draw.line(
+            [table_x0, y1, table_x0 + table_w, y1],
+            fill=_hex_to_rgb("#EEEEEE"),
+            width=max(1, int(round(2 * scale))),
+        )
+
+        x = table_x0
+        for c in show_cols:
+            cell_x0 = x
+            cell_x1 = x + col_widths[c]
+
+            # Bar columns
+            if c in [cols.total_distance, cols.m_per_min, cols.runs, cols.sprints]:
+                v = row.get(c)
+                try:
+                    v_float = float(v)
+                except Exception:
+                    v_float = 0.0
+
+                vmin, vmax = BAR_SCALES[c]
+                ratio = 0.0 if vmax <= vmin else (v_float - vmin) / float(vmax - vmin)
+                ratio = _clamp(ratio, 0.0, 1.0)
+
+                bx0 = cell_x0 + pad_x
+                by0 = y0 + (row_h - bar_h) // 2
+                bx1 = bx0 + int(bar_w * ratio)
+                by1 = by0 + bar_h
+
+                draw.rectangle([bx0, by0, bx1, by1], fill=_hex_to_rgb(BAR_COLORS[c]))
+
+                if c == cols.total_distance:
+                    txt = "{:.3f}".format(v_float) if pd.notna(v) else "—"
+                else:
+                    txt = "{:.0f}".format(v_float) if pd.notna(v) else "—"
+
+                tw = draw.textlength(txt, font=cell_font)
+                draw.text(
+                    (cell_x1 - pad_x - tw, y0 + int(round((row_h - 16 * scale) / 2))),
+                    txt,
+                    font=cell_font,
+                    fill=_hex_to_rgb("#111827"),
+                )
+            else:
+                val = row.get(c)
+                if pd.isna(val):
+                    txt = "—"
+                elif c == cols.minutes:
+                    try:
+                        txt = "{:.0f}".format(float(val))
+                    except Exception:
+                        txt = str(val)
+                else:
+                    txt = str(val)
+
+                draw.text(
+                    (cell_x0 + pad_x, y0 + int(round((row_h - 16 * scale) / 2))),
+                    txt,
+                    font=cell_font,
+                    fill=_hex_to_rgb("#111827"),
+                )
+
+            x += col_widths[c]
+
+    out = BytesIO()
+    img.save(out, format="PNG", optimize=True, dpi=(dpi, dpi))
+    return out.getvalue()
+
+
+# =========================
+# file: app.py
+# =========================
+
+from __future__ import annotations
+
+from pathlib import Path
+
+import streamlit as st
+import streamlit.components.v1 as components
+
+from load_table import (
+    build_player_match_overview,
+    estimate_table_height_px,
+    list_players_for_team,
+    list_teams,
+    load_physical_data,
+    styler_to_html,
+    table_to_png_bytes,
+    validate_physical_data,
+)
+
+
+@st.cache_data(show_spinner=False)
+def _load_cached(csv_path: str):
+    return load_physical_data(csv_path)
+
+
+def _default_index(options: list, desired: str) -> int:
+    desired_cf = desired.casefold()
+    for i, opt in enumerate(options):
+        if str(opt).casefold() == desired_cf:
+            return i
+    return 0
+
+
+def main() -> None:
+    st.set_page_config(page_title="Player Match Physical Overview", layout="wide")
+    st.title("Player Match Physical Overview")
+
+    csv_path = "physical_data_matches.csv"
+    if not Path(csv_path).exists():
+        st.error(
+            "Cannot find {!r} in the current folder.\n\n"
+            "Place `physical_data_matches.csv` next to `app.py`.".format(csv_path)
+        )
+        st.stop()
+
+    df = _load_cached(csv_path)
+    try:
+        validate_physical_data(df)
+    except Exception as e:
+        st.error(str(e))
+        st.stop()
+
+    teams = list_teams(df)
+    default_team_name = "FC Den Bosch"
+    team_default_idx = _default_index(teams, default_team_name)
+
+    with st.sidebar:
+        st.header("Filters")
+
+        team = st.selectbox("Team", teams, index=team_default_idx)
+        players = list_players_for_team(df, team) if team else []
+        player_1 = st.selectbox("Player", players, index=0 if players else None)
+
+        compare_options = ["(None)"] + players
+        compare_selected = st.selectbox("Compare with second player (optional)", compare_options, index=0)
+        player_2 = None if compare_selected == "(None)" else compare_selected
+        if player_2 == player_1:
+            player_2 = None
+
+        st.markdown("<div style='height: 18px;'></div>", unsafe_allow_html=True)
+        logo_path = Path("fc_den_bosch_logo.png")
+        if logo_path.exists():
+            st.image(str(logo_path), use_container_width=True)
+
+    if not team or not player_1:
+        st.info("Select a team and player in the sidebar.")
+        st.stop()
+
+    try:
+        display_df, styler = build_player_match_overview(df, team, player_1, compare_player_name=player_2)
+
+        # PNG download
+        png_bytes = table_to_png_bytes(display_df)
+        file_name = "physical_table_{}_{}.png".format(
+            str(player_1).replace(" ", "_"),
+            ("vs_" + str(player_2).replace(" ", "_")) if player_2 else "",
+        ).replace("__", "_").rstrip("_")
+
+        st.download_button(
+            label="Download table as PNG",
+            data=png_bytes,
+            file_name=file_name,
+            mime="image/png",
+            use_container_width=False,
+        )
+
+        # Render the HTML (exact same styling)
+        html = styler_to_html(styler)
+        height = estimate_table_height_px(n_rows=len(display_df))
+        components.html(html, height=height, scrolling=False)
+
+    except Exception as e:
+        st.error(str(e))
+
+
+if __name__ == "__main__":
+    main()
+
+
