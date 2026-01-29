@@ -133,6 +133,36 @@ def _match_date_from_match_id(match_id) -> Optional[pd.Timestamp]:
         return None
 
 
+def get_last_updated_date(df: pd.DataFrame) -> Optional[pd.Timestamp]:
+    """
+    Returns the most recent match date present in the dataset.
+    Prefers parsing match_id as YYYYMMDD; falls back to numeric max if needed.
+    """
+    if "match_id" not in df.columns or df.empty:
+        return None
+
+    parsed = df["match_id"].apply(_match_date_from_match_id)
+    if parsed.notna().any():
+        return parsed.max()
+
+    # fallback: interpret max match_id as YYYYMMDD if possible
+    mid_num = pd.to_numeric(df["match_id"], errors="coerce")
+    if mid_num.notna().any():
+        s = str(int(mid_num.max()))
+        try:
+            if len(s) == 8:
+                return pd.to_datetime(s, format="%Y%m%d", errors="raise")
+        except Exception:
+            return None
+
+    return None
+
+
+def format_last_updated(df: pd.DataFrame) -> str:
+    dt = get_last_updated_date(df)
+    return dt.strftime("%Y-%m-%d") if dt is not None else "—"
+
+
 def _compute_player_match_metrics(df: pd.DataFrame, team_name: str, player_name: str) -> pd.DataFrame:
     filtered = df.loc[
         (df["club"].astype(str) == str(team_name))
@@ -181,12 +211,6 @@ def build_player_match_overview(
     team_player_name: str,
     compare_player_name: Optional[str] = None,
 ) -> Tuple[pd.DataFrame, "pd.io.formats.style.Styler"]:
-    """
-    - Show ALL matches for player 1
-    - If compare selected: show ALL matches for player 2 too
-    - Sort most recent first; if same match -> player 1 first
-    - Player 2 rows light blue; player 1 rows white
-    """
     validate_physical_data(df)
     cols = OverviewColumns()
 
@@ -352,16 +376,12 @@ def _load_font(size: int, bold: bool = False):
 
 
 def _a4_landscape_px(dpi: int) -> tuple:
-    # A4: 11.69 x 8.27 inches (landscape)
     return int(round(11.69 * dpi)), int(round(8.27 * dpi))
 
 
 def _clamp(v: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, v))
 
-
-# file: load_table.py
-# replace ONLY table_to_png_bytes(...) with this
 
 def table_to_png_bytes(
     display_df: pd.DataFrame,
@@ -370,10 +390,6 @@ def table_to_png_bytes(
     caption: str,
     dpi: int = 200,
 ) -> bytes:
-    """
-    Render the table to A4 landscape PNG (auto-scaled), including title + caption.
-    Draw row separators AFTER painting rows so the lines are not overwritten.
-    """
     cols = OverviewColumns()
     df = display_df.copy()
     if "_row_type" not in df.columns:
@@ -390,7 +406,6 @@ def table_to_png_bytes(
         cols.sprints,
     ]
 
-    # Base layout (scaled)
     base_pad_x = 14
     base_row_h = 52
     base_header_h = 56
@@ -420,7 +435,6 @@ def table_to_png_bytes(
 
     avail_w = page_w - (2 * margin)
     avail_h = page_h - (2 * margin) - base_top_block_h
-
     scale = _clamp(min(avail_w / float(base_table_w), avail_h / float(base_table_h)), 0.45, 1.35)
 
     pad_x = int(round(base_pad_x * scale))
@@ -442,7 +456,6 @@ def table_to_png_bytes(
     header_font = _load_font(max(14, int(round(18 * scale))), bold=True)
     cell_font = _load_font(max(12, int(round(16 * scale))), bold=False)
 
-    # Title + caption (centered)
     y = margin
     tw = draw.textlength(title, font=title_font)
     draw.text(((page_w - tw) / 2.0, y), title, font=title_font, fill=_hex_to_rgb("#111827"))
@@ -458,10 +471,8 @@ def table_to_png_bytes(
     table_x1 = table_x0 + table_w
     table_y1 = table_y0 + header_h + (len(df) * row_h)
 
-    # Header background
     draw.rectangle([table_x0, table_y0, table_x1, table_y0 + header_h], fill=_hex_to_rgb("#FFFFFF"))
 
-    # Header labels
     x = table_x0
     for c in show_cols:
         draw.text(
@@ -472,7 +483,6 @@ def table_to_png_bytes(
         )
         x += col_widths[c]
 
-    # Rows (background + content)
     for i, row in df.iterrows():
         y0 = table_y0 + header_h + i * row_h
         y1 = y0 + row_h
@@ -537,19 +547,14 @@ def table_to_png_bytes(
 
             x += col_widths[c]
 
-    # Row separators + header separator (draw LAST so they remain visible)
-    sep_color = _hex_to_rgb("#E5E7EB")  # similar to app borders
+    # separators last
+    sep_color = _hex_to_rgb("#E5E7EB")
     sep_w = max(1, int(round(2 * scale)))
-
-    # line under header
     draw.line([table_x0, table_y0 + header_h, table_x1, table_y0 + header_h], fill=sep_color, width=sep_w)
-
-    # lines between rows
     for i in range(1, len(df) + 1):
         y_line = table_y0 + header_h + i * row_h
         draw.line([table_x0, y_line, table_x1, y_line], fill=sep_color, width=sep_w)
 
-    # Outer border (subtle)
     border_color = _hex_to_rgb("#D1D5DB")
     draw.rectangle([table_x0, table_y0, table_x1, table_y1], outline=border_color, width=max(1, int(round(2 * scale))))
 
