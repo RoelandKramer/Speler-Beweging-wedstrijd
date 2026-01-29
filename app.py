@@ -24,6 +24,13 @@ def _load_cached(csv_path: str):
     return load_physical_data(csv_path)
 
 
+def _default_index(options: list[str], desired: str) -> int:
+    try:
+        return options.index(desired)
+    except ValueError:
+        return 0
+
+
 def main() -> None:
     st.set_page_config(page_title="Player Match Physical Overview", layout="wide")
     st.title("Player Match Physical Overview")
@@ -44,12 +51,30 @@ def main() -> None:
         st.stop()
 
     teams = list_teams(df)
+    default_team_name = "FC Den Bosch"
+    team_default_idx = _default_index(teams, default_team_name)
 
     with st.sidebar:
         st.header("Filters")
-        team = st.selectbox("Team", teams, index=0 if teams else None)
+
+        team = st.selectbox("Team", teams, index=team_default_idx)
+
         players = list_players_for_team(df, team) if team else []
         player = st.selectbox("Player", players, index=0 if players else None)
+
+        # Push logo to bottom
+        st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
+        st.markdown(
+            "<div style='position: fixed; bottom: 18px; left: 18px; width: 280px; opacity: 0.98;'></div>",
+            unsafe_allow_html=True,
+        )
+
+        logo_path = Path("fc_den_bosch_logo.png")
+        if logo_path.exists():
+            st.markdown("<div style='height: 18px;'></div>", unsafe_allow_html=True)
+            st.image(str(logo_path), use_container_width=True)
+        else:
+            st.caption("Logo not found: fc_den_bosch_logo.png")
 
     if not team or not player:
         st.info("Select a team and player in the sidebar.")
@@ -57,12 +82,9 @@ def main() -> None:
 
     try:
         display_df, styler = build_player_match_overview(df, team, player)
-
-        # Render exact same layout/styling + show the full table without scrolling.
         html = styler_to_html(styler)
         height = estimate_table_height_px(n_rows=len(display_df))
         components.html(html, height=height, scrolling=False)
-
     except Exception as e:
         st.error(str(e))
 
