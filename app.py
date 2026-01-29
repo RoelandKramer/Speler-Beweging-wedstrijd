@@ -74,30 +74,32 @@ def main() -> None:
 
     try:
         display_df, styler = build_player_match_overview(df, team, player_1, compare_player_name=player_2)
-
+        
         title_text = "Player Match Physical Overview"
         caption_text = (
             "{} vs {} — {} (all matches)".format(player_1, player_2, team)
             if player_2
             else "{} — {} (per match)".format(player_1, team)
         )
-
+        
+        # Render the HTML table first
+        html = styler_to_html(styler)
+        height = estimate_table_height_px(n_rows=len(display_df))
+        components.html(html, height=height, scrolling=False)
+        
+        # Then generate PNG + show download button underneath
         png_bytes = table_to_png_bytes(display_df, title=title_text, caption=caption_text, dpi=200)
         file_name = "physical_table_{}_{}.png".format(
             str(player_1).replace(" ", "_"),
             ("vs_" + str(player_2).replace(" ", "_")) if player_2 else "solo",
         )
-
+        
         st.download_button(
-            label="Download table as PNG (A4 landscape)",
+            label="Download Table as PNG",
             data=png_bytes,
             file_name=file_name,
             mime="image/png",
         )
-
-        html = styler_to_html(styler)
-        height = estimate_table_height_px(n_rows=len(display_df))
-        components.html(html, height=height, scrolling=False)
 
     except Exception as e:
         st.error(str(e))
