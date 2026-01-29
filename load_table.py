@@ -33,6 +33,10 @@ REQUIRED_COLUMNS = {
     "sprint_runs",
     "position",
 }
+STREAMLIT_FONT_STACK = (
+    '"Source Sans 3","Source Sans Pro","Inter",system-ui,-apple-system,'
+    '"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'
+)
 
 BAR_COLORS = {
     "Total distance (km)": "#FDD8AC",
@@ -187,28 +191,39 @@ def build_player_match_overview(
     styler = display_df.style.hide(axis="index")
 
     table_styles = [
-        {
-            "selector": "th",
-            "props": [
-                ("font-weight", "700"),
-                ("font-size", "12px"),
-                ("text-align", "left"),
-                ("padding", "8px 10px"),
-                ("border-bottom", "2px solid #ddd"),
-            ],
-        },
-        {
-            "selector": "td",
-            "props": [
-                ("font-size", "12px"),
-                ("padding", "7px 10px"),
-                ("border-bottom", "1px solid #eee"),
-                ("vertical-align", "middle"),
-            ],
-        },
-        {"selector": "table", "props": [("border-collapse", "collapse"), ("width", "100%")]},
-        {"selector": "caption", "props": [("caption-side", "top"), ("font-weight", "700")]},
+    {
+        "selector": "table",
+        "props": [
+            ("border-collapse", "collapse"),
+            ("width", "100%"),
+            ("font-family", STREAMLIT_FONT_STACK),
+        ],
+    },
+    {
+        "selector": "th",
+        "props": [
+            ("font-family", STREAMLIT_FONT_STACK),
+            ("font-weight", "700"),
+            ("font-size", "12px"),
+            ("text-align", "left"),
+            ("padding", "8px 10px"),
+            ("border-bottom", "2px solid #ddd"),
+        ],
+    },
+    {
+        "selector": "td",
+        "props": [
+            ("font-family", STREAMLIT_FONT_STACK),
+            ("font-size", "12px"),
+            ("padding", "7px 10px"),
+            ("border-bottom", "1px solid #eee"),
+            ("vertical-align", "middle"),
+        ],
+    },
+    {"selector": "caption", "props": [("caption-side", "top"), ("font-weight", "700")]},
     ]
+
+    
     styler = styler.set_table_styles(table_styles)
 
     right_cols = [cols.minutes, cols.total_distance, cols.m_per_min, cols.runs, cols.sprints]
@@ -241,16 +256,19 @@ def build_player_match_overview(
 
 
 def styler_to_html(styler: "pd.io.formats.style.Styler") -> str:
-    """
-    Streamlit-friendly HTML wrapper that preserves the Styler's CSS.
-    """
     html = styler.to_html()
     return f"""
-    <div style="width: 100%; overflow: visible;">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+      body {{
+        margin: 0;
+        font-family: {STREAMLIT_FONT_STACK};
+      }}
+    </style>
+    <div style="width: 100%; overflow: visible; font-family: {STREAMLIT_FONT_STACK};">
       {html}
     </div>
     """
-
 
 def estimate_table_height_px(n_rows: int) -> int:
     """
